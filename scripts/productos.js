@@ -35,7 +35,6 @@ function mostrarProds(prods) {
     }
 
     const html = prods.map(p => {
-        // Lógica para determinar la clase de existencias
         const getExistenciasClase = () => {
             if (p.Existencias_P > 125) return 'verde';
             if (p.Existencias_P >= 50 && p.Existencias_P <= 125) return 'gris';
@@ -43,7 +42,6 @@ function mostrarProds(prods) {
             return 'rojo';
         };
 
-        // Renderizar precio con descuento si aplica
         const renderPrecio = () => {
             if (p.Tiene_Descuento_P) {
                 return `
@@ -56,7 +54,6 @@ function mostrarProds(prods) {
             return `<p><i class="fa-solid fa-dollar-sign"></i> ${p.Precio_P}</p>`;
         };
 
-        // Botón de carrito según estado de sesión
         const renderBotonCarrito = () => {
             const idSesion = localStorage.getItem('idUsr');
             if (idSesion) {
