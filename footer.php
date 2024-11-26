@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer</title>
+    <script src="https://kit.fontawesome.com/48174618d9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="estilos/estilos_footer.css">
+</head>
+<body>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3 class="titulo">Ayuda</h3>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Productos</a></li>
+                    <li><a href="#">Estado de pedido</a></li>
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                    <li><a href="#">Cómo devolver</a></li>
+                    <li><a href="#">Cómo evitar fraudes al comprar en línea</a></li>
+                    <li><a href="#">Servicios de tienda</a></li>
+                    <li><a href="#">Tarjeta regalo</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="titulo">Empresa</h3>
+                <ul>
+                    <li><a href="#">Acerca de</a></li>
+                    <li><a href="#">Contactanos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="titulo">Métodos de pago</h3>
+                <div class="payment-methods">
+                    <img class="pagos" src="../Zara2.0/fotos/visa.png" alt="Visa" >
+                    <img class="pagos" src="../Zara2.0/fotos/card.png" alt="Mastercard" >
+                    <img src="../Zara2.0/fotos/american-express.png" alt="American Express" >
+                    <img src="../Zara2.0/fotos/money.png" alt="Paypal" >
+                    <img src="../Zara2.0/fotos/apple-pay.png" alt="Apple Pay" >
+                </div>
+                <br><br>
+                <h3 class="titulo">Follow us!</h3>
+                <div class="social-media">
+                  <i class="fa-brands fa-facebook fa-lg " style="color: #ffffff;"></i>
+                  <i class="fa-brands fa-instagram fa-lg " style="color: #ffffff;"></i>
+                  <i class="fa-brands fa-x-twitter fa-lg " style="color: #ffffff;"></i>
+                  <i class="fa-brands fa-tiktok fa-lg" style="color: #ffffff;"></i>
+                  <i class="fa-brands fa-youtube fa-lg" style="color: #ffffff;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <ul>
+                <li><a href="#"> &copy; 2024 Tara. Todos los derechos reservados.</a></li>
+                <li><a href="#">Política de privacidad</a></li>
+                <li><a href="#">Condiciones de compra</a></li>
+                <li><a href="#">Política de cookies</a></li>
+                <li><a href="#">Política de seguridad</a></li>
+            </ul>
+            <div class="footer-country">
+                <span>México</span> | <span>Español</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

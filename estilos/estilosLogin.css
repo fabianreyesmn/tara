@@ -1,0 +1,437 @@
+div#contenedor{
+    position: fixed;
+    width: 842px;
+    height: 670px;
+    display: none;
+    top: 5px;
+    right: 5px;
+    grid-template-columns: 1fr 1fr;
+    z-index: 6;
+    font-family: 'Roboto', sans-serif;
+}
+
+div.formulariosLoginRegistro{
+    border-right: 1px solid black;
+    width: 401px;
+    height: 645px;
+    border-end-end-radius: 10px;
+    border-start-end-radius: 10px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+}
+
+div.carruselLogin{
+    /* border: 1px solid black; */
+    width: 421px;
+    height: 645px;
+    padding: 0;
+    margin: 0;
+    border-start-start-radius: 10px;
+    border-end-start-radius: 10px;
+}
+
+.cerrar-menu {
+    position: fixed;
+    top: -5px;
+    right: 830px;
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+}
+
+nav#menu{
+    text-align: right;
+    font-size: 15px;
+}
+
+nav#menu button{
+    text-decoration: none;
+    color: white;
+    border: 2px solid white;
+    padding: 3px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    width: 100px;
+    height: 35px;
+}
+
+form#formLogin{
+    /* border: 1px solid black; */
+    margin-top: 10px;
+    padding: 20px;
+    font-size: 16px;
+}
+
+form#formLogin input{
+    margin:5px 0 15px 0;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid white;
+    outline: none;
+    background-color: black;
+    padding: 3px;
+    color: white;
+    font-size: 14px;
+}
+
+form#formLogin label{
+    margin: 3px 0;
+    font-size: 14px;
+}
+
+form#formLogin input:focus {
+    background-color: black; /* Cambia este valor al color que deseas */
+}
+
+input::content{
+    transition: background-color 5000s ease-in-out 0s; /* Ajusta la duración de la transición según tus necesidades */
+    background-color: black !important; /* Cambia este valor al color que deseas */
+    color: white !important; /* Cambia este valor al color que deseas para el texto */
+}
+
+.cute{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: whitesmoke;
+    font-family: 'GFS Didot', serif;
+    padding: 20px;
+    width: 100%;
+}
+
+.cute1{
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+}
+
+.cute1 p{
+    margin: 0 20px;
+}
+
+.cute2{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+.cute3{
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.cute3 p{
+    margin: 0 20px;
+}
+
+.titulo{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 40px;
+}
+
+.links{
+    color: black; 
+    text-decoration: none;
+}
+
+.links:hover{
+    text-decoration: none;
+    color: black; 
+}
+
+form#formLogin select {
+    padding: 5px 0; 
+    font-size: 12px; 
+    border: 1px solid white; 
+    border-radius: 4px; 
+    outline: none; 
+    width: 100%;
+    margin:10px 0 0 0;
+    background-color: black;
+    color: white;
+}
+
+button#submit{
+    color: white;
+    border: 1px solid white;
+    background-color: black;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+button#submit:hover{
+    background-color: rgb(54, 54, 54);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+div#navegar{
+    border-top-right-radius: 10px;
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 401px;
+    height: 500px;
+    background-color: black;
+    margin:0 5px; 
+    /* border: 1px solid white; */
+    text-align: center;
+}
+
+div#navegar h1{
+    /* border: 1px solid white; */ 
+    background-color: white;
+    color: black;
+    margin: 0;
+    padding: 25px 0 0px 0;
+    font-size: 35px;
+    margin: 0;
+}
+
+div#navegar h4{
+    background-color: white;
+    color: black;
+    margin: 0;
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+
+div#navegar p{
+    font-size: 18px;
+    padding: 5px 20px;
+}
+
+div#formulario_recuperar{
+    border: 1px solid;
+    width: 500px;
+    margin:20px auto;
+    text-align: center;
+    border-radius: 10px;
+}
+
+div#div-form{
+    min-height: 415px;
+    max-height: 415px;
+}
+
+div#formulario_recuperar h1{
+    text-align: center; 
+    color: white;
+}
+
+div#formulario_recuperar div#titulo{
+    border: 1px solid;
+    background-color: black;
+    width: 499px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 8px; 
+}
+
+div#recuperarContenedor{
+    margin: 20px;
+}
+
+label.frecuperar{
+    font-size: 17px;
+    margin: 5px 5px;
+    /* border: 1px solid; */
+}
+
+input[type="text"].frecuperar, input[type="password"].frecuperar {
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 15px;
+    padding-left: 5px;
+}
+
+input[type="submit"].frecuperar, input[type="button"].frecuperar {
+    margin-left: 10px;
+    height: 35px;
+    width: 80px;
+    padding: 5px;
+    font-size: 12px;
+    color: black;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+}
+
+input[type="submit"].frecuperar:hover, input[type="button"].frecuperar:hover{
+    background-color: rgb(54, 54, 54);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+input[type="submit"]#forma-pago{
+    margin: 10px 0 10px 1365px;
+    height: 45px;
+    width: 100px;
+    padding: 5px;
+    font-size: 15px;
+    color: black;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover#forma-pago{
+    background-color: rgb(54, 54, 54);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+
+#pago{
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+}
+
+#div-1{
+    flex: 70%;
+    margin: 20px ;
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+#div-2{
+    padding: 10px;
+    flex: 30%;
+    border: 1px solid black;
+    margin: 20px ;
+    background-color: white;
+}
+
+#tabla-div-1{
+    width: 70%;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+#tabla-div-1 tbody, tr{
+    border: 1px solid black;
+}
+
+#tabla-div-1 td, th{
+    padding: 20px 0 20px 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
+
+h2#titulopago{
+    font-size:25px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+#pagar-ult{
+    text-align: center;
+    margin: 10px auto;
+    padding:20px 35px;
+    border: 1px solid;
+    border-radius: 7px;
+    width: 600px;
+    font-family: 'Roboto', sans-serif;
+}
+
+#informacion-pago label{
+    padding: 5px 0;
+}
+
+#informacion-pago input{
+    margin: 0 0 7px 0;
+    width: 300px;
+    height: 30px;
+}
+
+#informacion-pago select{
+    margin: 0 0 7px 0;
+    width: 300px;
+    height: 30px;
+}
+
+#btn-1:hover{
+    background-color: rgb(54, 54, 54);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+#btn-1{
+    height: 45px;
+    width: 100%;
+    padding: 5px;
+    font-size: 15px;
+    color: black;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+.ji{
+  color: #967969;
+  font-family: 'GFS Didot', serif;
+  letter-spacing: 7px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.he{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+.field{
+    width:500px;
+    border: solid 1px #ccc;
+    padding: 10px;
+    
+      
+}
+.btn-super{
+    border-radius: 3px;
+    display: inline-block;
+    padding: 15px 15px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    border: 0;
+    color: white;
+    background-color: #C19A6B;
+  }
+
+  .btn-super:hover{
+    background-color:#E5AA70;
+   
+  }
+  .btn-super:active{
+    background-color: #DAA06D;
+  }
