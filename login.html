@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/style_forms.css">
+    <script src="https://kit.fontawesome.com/6661c2c190.js" crossorigin="anonymous"></script>
+    <script src="js/main.js" defer></script>
+    <title>Document</title>
+</head>
+    <body>
+        <div id="header-container"></div>
+        <div class="loginB">
+            <div class="form-container">
+                    <div class="form-box login-form">
+                        <h2>Login</h2>
+                        <div class="input-container">
+                            <i class="icon fa-solid fa-user"></i>
+                            <input type="text" placeholder="Nombre" required>
+                        </div>
+                        <div class="input-container">
+                            <i class="icon fa-solid fa-key"></i>
+                            <input type="password" placeholder="Contraseña" required>
+                        </div>
+                        <button type="submit">Login</button>
+                        <div class="conditions">
+                            ¿No tienes una cuenta? <a href="#">Registrate</a>
+                        </div>
+                    </div>
+                
+                    <div class="form-box register-form">
+                        <h2>Registrate</h2>
+                        <div class="input-container">
+                            <i class="icon fa-solid fa-user"></i>
+                            <input type="text" placeholder="Nombre" required>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-container">
+                                <input type="text" placeholder="Apellido Paterno" required>
+                            </div>
+                            <div class="input-container">
+                                <input type="text" placeholder="Apellido Materno" required>
+                            </div>
+                        </div>
+                        
+                        <div class="input-container">
+                            <i class="icon fa-solid fa-envelope"></i>
+                            <input type="email" placeholder="Correo Electrónico" required>
+                        </div>
+                        
+                        <div class="input-container">
+                            <i class="icon fa-solid fa-key"></i>
+                            <input type="password" placeholder="Contraseña" required>
+                        </div>
+                        
+                        <button type="submit">Registrate</button>
+                        <div class="conditions">
+                            Al registrarte, aceptas nuestras <a href="#">Condiciones de uso</a> y <a href="#">Política de privacidad</a>.
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div id="footer-container"></div>
+        <script src="js/formHandler.js"></script>
+    </body>
+</html>
