@@ -1,0 +1,108 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.principal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    margin: 50px 80px;
+    margin-bottom: 60px;
+    /* border-top: 2px solid #bebebe8f; */
+    /* border-bottom: 2px solid #bebebe8f; */
+}
+
+.imagen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 500px;
+    margin: 0;
+    border: 10px solid rgba(0, 0, 0, 0.034);
+}
+
+.imagen img{
+    width: 400px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 0px;
+    /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); */
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+/* .imagen img:hover{ */
+    /* transform: scale(1.02); */
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */
+/* } */
+
+.informacion{
+    width: 550px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 15px;
+    margin: 0;
+    padding: 50px;
+    border-right: 10px solid rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.034);
+    text-align: right;
+}
+
+.informacion p{
+    font-size: 20px;
+    text-align: right;
+}
+
+.agregar-p{
+    background-color: rgba(139, 139, 139, 0.2);
+    border: 1px solid #2c2c2c;
+    border-radius: 50%;
+    line-height: 1.12;
+    padding: 12px;
+    color: #202020;
+    border: none;
+    font-size: 28px;
+}
+
+.agregar-p:hover{
+    /* background-color: rgb(235, 235, 235); */
+    color: rgb(0, 0, 0);
+}
+
+.no-agregar-p{
+    background-color: rgba(151, 151, 151, 0.2);
+    border: 1px solid #2c2c2c;
+    border-radius: 50%;
+    line-height: 1;
+    padding: 12px;
+    color: #979797;
+    border: none;
+    font-size: 20px;
+}
+
+.tachado{
+    text-decoration: line-through;
+    color: #646464;
+}
+
+.centrar-precio{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.centrar-precio *{
+    margin: 0 10px;
+    padding: 0;
+}
+
+*{
+    font-family: 'GFS Didot', serif;
+}
