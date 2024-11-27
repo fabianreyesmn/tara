@@ -9,6 +9,8 @@
         <a href="productos.html">PRODUCTOS</a>
         <a href="#">ACERCA DE</a>
         <a href="contacto.html">CONTACTO</a>
+        <a style="display: none;" id="ABC" href="ABC.html">ABC</a>
+        <a style="display: none;" id="Consultas" href="Concultas.html">CONSULTAS</a>
     </div>
 
     <div class="header-center">
@@ -16,7 +18,9 @@
     </div>
 
     <div class="header-right">
-        <p><a class="links" name="btnMostrarMenu" href="login.html"><i class="fa-regular fa-user" style="color: #ffffff;">&nbsp;</i>INICIAR SESION</a></p>
+        <a id="iniciarSesionI" name="btnMostrarMenu" href="#" onclick="cerrarSesion()">
+            <i class="fa-regular fa-user" style="color: #ffffff;">&nbsp;</i>INICIAR SESION
+        </a>
         <a href="#" id="nombreUsuario" style="display: none;">(USUARIO)</a>
     </div>
 </header>
