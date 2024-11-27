@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Procesar el formulario de registro
-    function procesarFormularioRegistro() {
+    async function procesarFormularioRegistro() {
         const datos = {
             nombre: contenedorRegistro.querySelector('input[placeholder="Nombre"]').value.trim(),
             apellidoPaterno: contenedorRegistro.querySelector('input[placeholder="Apellido Paterno"]').value.trim(),
@@ -93,8 +93,32 @@ document.addEventListener('DOMContentLoaded', function() {
             correo: contenedorRegistro.querySelector('input[placeholder="Correo Electrónico"]').value.trim(),
             contrasena: contenedorRegistro.querySelector('input[placeholder="Contraseña"]').value.trim()
         };
+    
         console.log('Datos del formulario de registro:', datos);
-        
+    
+        // Enviar datos al servidor
+        try {
+            const response = await fetch('http://localhost:3000/registro', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(datos),
+            });
+    
+            const resultado = await response.json();
+            if (response.ok) {
+                console.log('Registro exitoso:', resultado);
+                alert('Registro exitoso');
+            } else {
+                console.error('Error al registrar:', resultado.error);
+                alert(`Error: ${resultado.error}`);
+            }
+        } catch (error) {
+            console.error('Error en la solicitud de registro:', error);
+            alert('Ocurrió un error en el registro');
+        }
+    
         // Limpiar los campos del formulario de registro
         contenedorRegistro.querySelector('input[placeholder="Nombre"]').value = '';
         contenedorRegistro.querySelector('input[placeholder="Apellido Paterno"]').value = '';
@@ -102,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         contenedorRegistro.querySelector('input[placeholder="Correo Electrónico"]').value = '';
         contenedorRegistro.querySelector('input[placeholder="Contraseña"]').value = '';
     }
-
+    
     // Procesar el formulario de inicio de sesión
     async function procesarFormularioInicioSesion() {
         const nombre = contenedorInicio.querySelector('input[placeholder="Nombre"]').value.trim();
