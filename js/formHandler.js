@@ -168,6 +168,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Inicio de sesión exitoso como empleado:', result);
                 localStorage.setItem('nombreUsuario', result.nombre);
                 localStorage.setItem('tipoUsuario', result.tipo);
+                localStorage.setItem('idUsuario', result.idUsuario);
+
                 window.location.href = 'index.html';
             } else {
                 // Si el login de empleado falla, intentar login como cliente
@@ -187,6 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('Inicio de sesión exitoso como cliente:', result);
                     localStorage.setItem('nombreUsuario', result.nombre);
                     localStorage.setItem('tipoUsuario', result.tipo);
+                    localStorage.setItem('idUsuario', result.idUsuario);
                     window.location.href = 'index.html';
                 } else {
                     console.error('Error de inicio de sesión:', result.error);
