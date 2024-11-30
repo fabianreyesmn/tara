@@ -62,6 +62,41 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
             esValido = false;
         }
+
+        // Validar nombre (1-20 caracteres, solo letras y espacios)
+        const nombreInput = contenedorRegistro.querySelector('input[placeholder="Nombre"]');
+        const nombre = nombreInput.value.trim();
+        const nombreRegex = /^[a-zA-Z\s]{1,20}$/;
+        if (!nombreRegex.test(nombre)) {
+            nombreInput.classList.add('error');
+            setTimeout(() => {
+                nombreInput.classList.remove('error');
+            }, 500);
+            esValido = false;
+        }
+
+        // Validar apellido materno (1-50 caracteres, solo letras y espacios)
+        const apellidoPaternoInput = contenedorRegistro.querySelector('input[placeholder="Apellido Paterno"]');
+        const apellidoPaterno = apellidoPaternoInput.value.trim();
+        const apellidoPaternoRegex = /^[a-zA-Z\s]{1,50}$/;
+        if (!apellidoPaternoRegex.test(apellidoPaterno)) {
+            apellidoPaternoInput.classList.add('error');
+            setTimeout(() => {
+                apellidoPaternoInput.classList.remove('error');
+            }, 500);
+            esValido = false;
+        }
+
+        const apellidoMaternoInput = contenedorRegistro.querySelector('input[placeholder="Apellido Materno"]');
+        const apellidoMaterno = apellidoPaternoInput.value.trim();
+        const apellidoMaternoRegex = /^[a-zA-Z\s]{1,50}$/;
+        if (!apellidoPaternoRegex.test(apellidoPaterno)) {
+            apellidoPaternoInput.classList.add('error');
+            setTimeout(() => {
+                apellidoPaternoInput.classList.remove('error');
+            }, 500);
+            esValido = false;
+        }
         
         return esValido;
     }
@@ -89,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const datos = {
             nombre: contenedorRegistro.querySelector('input[placeholder="Nombre"]').value.trim(),
             apellidoPaterno: contenedorRegistro.querySelector('input[placeholder="Apellido Paterno"]').value.trim(),
-            apellidoMaterno: contenedorRegistro.querySelector('input[placeholder="Apellido Materno"]').value.trim(),
+            apellidoMaterno: contenedorRegistro.querySelector('input[placeholder="Apellido Materno"]').value.trim() || "-",
             correo: contenedorRegistro.querySelector('input[placeholder="Correo Electrónico"]').value.trim(),
             contrasena: contenedorRegistro.querySelector('input[placeholder="Contraseña"]').value.trim()
         };

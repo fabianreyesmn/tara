@@ -89,6 +89,13 @@
     position: relative;
 }
 
+.input-container_2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
 .input-container i.icon {
     position: absolute;
     left: 10px;

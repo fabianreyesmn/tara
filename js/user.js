@@ -75,27 +75,33 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Error al cargar datos del usuario');
         }
     }
-    
+
     editarBtn.addEventListener('click', function() {
-        const tipoUsuario = localStorage.getItem('tipoUsuario'); // Obtener el tipo de usuario (cliente o empleado)
+        const tipoUsuario = localStorage.getItem('tipoUsuario');
         const idUsuario = localStorage.getItem('idUsuario');
 
-        // Seleccionar los inputs dependiendo del tipo de usuario
-        const inputsSucnac = document.querySelectorAll('#userForm input.sucnac');  // Inputs con la clase 'sucnac'
-        const esEdicion = inputsSucnac[0].disabled;  // Verificar si el primer input con clase 'sucnac' está deshabilitado
-    
-        // Habilitar o deshabilitar los inputs con clase 'sucnac'
+        const inputsSucnac = document.querySelectorAll('#userForm input.sucnac');
+        const esEdicion = inputsSucnac[0].disabled;
+
         inputsSucnac.forEach(input => {
             input.disabled = !input.disabled;
         });
-    
-        // Cambiar el texto del botón entre 'Editar' y 'Guardar' según el estado de los inputs
+
         editarBtn.textContent = esEdicion ? 'Guardar' : 'Editar';
-    
-        // Lógica para guardar los datos cuando el botón cambia a "Guardar"
+
         if (!esEdicion) {
-            const datos = {}; // Objeto donde guardaremos los datos a enviar
-    
+            // First, validate the form
+            if (!validarFormulario(tipoUsuario)) {
+                // If validation fails, re-disable inputs and change button back
+                inputsSucnac.forEach(input => {
+                    input.disabled = true;
+                });
+                editarBtn.textContent = 'Editar';
+                return;
+            }
+
+            const datos = {}; 
+
             // Dependiendo del tipo de usuario, obtenemos los datos de los inputs correspondientes
             if (tipoUsuario === 'empleado') {
                 datos.nombre = document.querySelector('input[name="nombre"]').value;
@@ -116,25 +122,107 @@ document.addEventListener('DOMContentLoaded', function() {
                 datos.telefono = document.querySelector('input[name="telefono"]').value;
                 datos.tipoUsuario = tipoUsuario;
             }
-    
+
             console.log('Datos guardados:', datos);
             fetch(`http://localhost:3000/updateUsuario/${idUsuario}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(datos),  // Enviamos los datos en formato JSON
+                body: JSON.stringify(datos),
             })
             .then(response => response.json())
             .then(data => {
                 console.log('Datos guardados correctamente:', data);
+                window.location.href = 'userPage.html';
             })
             .catch(error => {
                 console.error('Error al guardar los datos:', error);
             });
-            window.location.href = 'userPage.html';
         }
     });
+
+    // Validation function
+    function validarCampo(input, regex, mensajeError, opcional = false) {
+        // Si el campo es opcional y está vacío, se considera válido
+        if (opcional && input.value.trim() === '') {
+            input.classList.remove('error');
+            return true;
+        }
+    
+        // Si no está vacío, aplicar la validación normal
+        if (!regex.test(input.value.trim())) {
+            input.classList.add('error');
+            alert(mensajeError);
+            cargarDatosUsuario();
+            return false;
+        }
+        input.classList.remove('error');
+        return true;
+    }
+
+    // Validation function for the entire form
+    function validarFormulario(tipoUsuario) {
+        let esValido = true;
+
+        const nombre = document.querySelector('input[name="nombre"]');
+        esValido = validarCampo(
+            nombre,
+            /^[a-zA-Z\s]{1,20}$/,
+            'El nombre debe contener solo letras y tener un máximo de 20 caracteres.'
+        ) && esValido;
+
+        const apellidop = document.querySelector('input[name="apellidop"]');
+        esValido = validarCampo(
+            apellidop,
+            /^[a-zA-Z\s]{1,50}$/,
+            'El apellido paterno debe contener solo letras y tener un máximo de 50 caracteres.'
+        ) && esValido;
+
+        const apellidom = document.querySelector('input[name="apellidom"]');
+        esValido = validarCampo(
+            apellidom,
+            /^[a-zA-Z\s]{1,50}$/,
+            'El apellido materno debe contener solo letras y tener un máximo de 50 caracteres.',
+            true
+        ) && esValido;
+
+        const telefono = document.querySelector('input[name="telefono"]');
+        esValido = validarCampo(
+            telefono,
+            /^\d{10}$/,
+            'El teléfono debe tener 10 dígitos numéricos.',
+            true
+        ) && esValido;
+
+        const correo = document.querySelector('input[name="correo"]');
+        esValido = validarCampo(
+            correo,
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            'El correo no es válido.',
+            true
+        ) && esValido;
+
+        const direccion = document.querySelector('input[name="direccion"]');
+        esValido = validarCampo(
+            direccion,
+            /^.{1,100}$/,
+            'La dirección debe tener un máximo de 100 caracteres.',
+            true
+        ) && esValido;
+
+        if (tipoUsuario === 'cliente') {
+            const nacionalidad = document.querySelector('input[name="nacionalidad"]');
+            esValido = validarCampo(
+                nacionalidad,
+                /^[a-zA-Z\s]{1,25}$/,
+                'La nacionalidad debe contener solo letras y tener un máximo de 25 caracteres.',
+                true
+            ) && esValido;
+        }
+
+        return esValido;
+    }
 
     salirBtn.addEventListener('click', function() {
         window.location.href = 'index.html';
