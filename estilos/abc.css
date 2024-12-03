@@ -1,0 +1,199 @@
+div.formularios {
+    margin: 0;
+    padding: 40px 0px;
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+    background-color: #f0f0f0;
+    overflow: auto;
+  } 
+  .rounded-div {
+    background-color: #f8f8f8;
+    border-radius: 18px;
+    border: 1px solid #ddd; 
+    padding: 10px 30px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    font-family: 'Arial', sans-serif;
+    /* width: 80%; */
+    margin: 20px 40px;
+    letter-spacing: 3px;
+}
+
+ 
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+ 
+  /* titulo */
+
+/* Esta es la clase que contiene el acordeon */
+.grande {
+    flex: 2; /* Toma más espacio */
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+.right-container {
+  flex: 1; /* Toma menos espacio */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+ /* son los botones */
+ .accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 16px;
+  transition: 0.4s;
+  display: block;
+}
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+.active:after {
+  content: "\2212";
+}
+
+
+/* Es el drop down de los botones */
+.panel {
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+} 
+
+
+
+/* Estos son los de altas y bajas */
+.cam, .baj {
+  text-align: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 10px 30px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* estoo es los estilos de los formularios */
+/* o sea campo panel y submit y fomrulario */
+.campo {
+  position: relative;
+  margin-bottom: 20px;
+}
+.campo input, 
+.campo textarea {
+  width: 90%; /* Ancho específico */
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra en el campo */
+}
+.campo input::placeholder, .campo textarea::placeholder {
+  color: #999;
+}
+.campo textarea {
+  resize: none;
+  height: 100px;
+  border-radius: 15px;
+}
+.campo::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 0; 
+  width: 300px; 
+  height: 70%;
+  background-color: rgba(200, 200, 200, 0.5);
+  border-radius: 25px;
+  z-index: 0;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+/* botonees */
+.boton-enviar {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para el botón */
+}
+
+.boton-enviar:hover {
+  background-color: #333333;
+}
+
+/* Panel o sea lo que baja de los botones */
+.panel {
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+} 
+
+.formulario {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+select {
+  color: #444;
+  width: 100%; 
+  padding: 8px; 
+  border-radius: 5px; 
+  border: 1px solid #ccc; 
+  font-size: 16px; 
+  background-color: #f9f9f9; 
+  cursor: pointer; 
+}
+
+select:focus {
+  border-color: #007BFF; 
+  outline: none; 
+}
+.campoD {
+  margin-bottom: 10px; 
+}

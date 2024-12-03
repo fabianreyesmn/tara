@@ -1,11 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tara</title>
+<meta charset="UTF-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/6661c2c190.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="estilos/abc.css" />
+<script src="js/main.js" defer></script>
 </head>
 <body>
-    <h1>Altas bajas y cambios jaisel</h1>
-</body>
-</html>
+    <div id="header-container"></div>
+    <div class="formularios">
+        <div class="rounded-div">
+            <h2>Control de Operaciones</h2>
+        </div>
+        
+        <div class="container">
+            <div class="grande">
+                <h2>Altas</h2>
+                <button class="accordion">Producto</button>
+                <div class="panel">
+                    <form class="formulario">
+                        <div class="campo">
+                            <input type="text" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" required>
+                        </div>
+                        <div class="campo">
+                            <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto" required></textarea>
+                        </div>
+                        <div class="campo">
+                            <input type="text" id="idCategoria" name="idCategoria" placeholder="ID Categoría" required>
+                        </div>
+                        <div class="campo">
+                            <input type="text" id="idProveedor" name="idProveedor" placeholder="ID Proveedor" required>
+                        </div>
+                        <div class="campo">
+                            <input type="text" id="idTalla" name="idTalla" placeholder="ID Talla" required>
+                        </div>
+                        <div class="campo">
+                            <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" required>
+                        </div>
+                        <div class="campo">
+                            <input type="number" id="precio" name="precio" placeholder="Precio" step="0.01" required>
+                        </div>
+                        <button type="submit" class="boton-enviar">Guardar</button>
+                    </form>
+                </div>
+        
+                <button class="accordion">Proveedor</button>
+                <div class="panel">
+                    <form class="formulario">
+                      <div class="campo">
+                          <input type="text" id="nombrePrvedor" name="nombreProvedor" placeholder="Nombre del Proveedor" required>
+                      </div>
+                      <div class="campo">
+                          <input type="text" id="apellidop" name="apellidop" placeholder="Apellido Paterno" required>
+                      </div>
+                      <div class="campo">
+                        <input type="text" id="apellidom" name="apellidom" placeholder="Apellido Materno" required>
+                      </div>
+                      <div class="campo">
+                          <input type="text" id="direccion" name="direccion" placeholder="Direccion" required>
+                      </div>
+                      <div class="campo">
+                        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono (Ej. 123-456-7890)" 
+                              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                              title="El formato debe ser 123-456-7890" required>
+                      </div>
+                       <div class="campo">
+                        <input type="email" id="correo" name="correo" placeholder="Correo Electrónico" required>
+                      </div>
+                      <div class="campo">
+                        <input type="text" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad" required>
+                      </div>
+                        <button type="submit" class="boton-enviar">Guardar </button>
+                    </form>
+                </div>
+        
+                <button class="accordion">Categoría</button>
+                <div class="panel">
+                    <form class="formulario">
+                      <div class="campo">
+                        <input type="text" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" required>
+                      </div>
+                        <button type="submit" class="boton-enviar">Guardar </button>
+                    </form>
+                </div>
+
+                <button class="accordion">Talla</button>
+                <div class="panel">
+                    <form class="formulario">
+                        <div class="campo">
+                            <input type="text" id="nombreTalla" name="nombreTalla" placeholder="Nombre de la talla" required>
+                        </div>
+                            <button type="submit" class="boton-enviar">Guardar </button>
+                    </form>
+                </div>
+        
+                <button class="accordion">Nacionalidad</button>
+                <div class="panel">
+                    <form class="formulario">
+                      <div class="campo">
+                        <input type="text" id="nombreNacionalida" name="nombreNacionalidad" placeholder="Nacinalidad" required>
+                      </div>
+                        <button type="submit" class="boton-enviar">Guardar </button>
+                    </form>
+                </div>
+            </div>
+        
+            <!-- Sección derecha -->
+            <div class="right-container">
+                <div class="cam">
+                    <h2>Cambios</h2>
+                    <div class="campoD">
+                      <select id="nombreProducto" name="nombreProducto" required>
+                          <option value="" disabled selected>Seleccione una opccion  </option>
+                          <option value="producto1">Producto</option>
+                          <option value="producto2">Proveedor</option>
+                          <option value="producto3">Categoria</option>
+                      </select> 
+                  </div>
+                    <div class="campo">
+                        <input type="text" id="idCambio" name="idCambio" placeholder="Id" required>
+                    </div>
+                    <button type="submit" class="boton-enviar">Buscar</button>
+                </div>
+      
+      
+                <div class="baj">
+                    <h2>Bajas</h2>
+                    <div class="campoD">
+                      <select id="nombreProducto" name="nombreProducto" required>
+                          <option value="" disabled selected>Seleccione una opccion  </option>
+                          <option value="producto1">Producto</option>
+                          <option value="producto2">Proveedor</option>
+                          <option value="producto3">Categoria</option>
+                      </select> 
+                    </div>
+                    <div class="campo">
+                        <input type="text" id="idBaja" name="idBaja" placeholder="Id" required>
+                    </div>
+                    <button type="submit" class="boton-enviar">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer-container"></div>
+  <script src="js/abcBack.js"></script>
+  </body>
+  </html> 
