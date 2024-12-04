@@ -174,86 +174,56 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Agregar Producto
-app.post('/addProducto', async (req, res) => {
-    const { 
-      nombreProducto, 
-      descripcion, 
-      idCategoria, 
-      idProveedor, 
-      idTalla, 
-      cantidad, 
-      precio, 
-      imagenProducto 
-    } = req.body;
-  
-    const connection = await pool.getConnection();
-  
+    document.querySelector('form.formulario[id^="formProducto"]').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Prepare form data
+        const formData = new FormData(this);
+        const imagenInput = document.getElementById('imagenProducto');
+        
+        // Convert form data to an object
+        const productoData = {
+            nombreProducto: document.getElementById('nombreProducto').value.trim(),
+            descripcion: document.getElementById('descripcion').value.trim(),
+            idCategoria: document.getElementById('idCategoria').value.trim(),
+            idProveedor: document.getElementById('idProveedor').value.trim(),
+            idTalla: document.getElementById('idTalla').value.trim(),
+            cantidad: document.getElementById('cantidad').value.trim(),
+            precio: document.getElementById('precio').value.trim(),
+            imagenProducto: '' // We'll handle image upload separately if needed
+        };
+
+        // Validate fields
+        const requiredFields = Object.values(productoData);
+        if (requiredFields.some(field => field === '')) {
+            alert('Por favor, complete todos los campos.');
+            return;
+        }
+
+        // Send data to backend
+        fetch('http://localhost:3000/addProducto', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productoData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                alert(data.mensaje);
+                // Reset form
+                this.reset();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Hubo un error al procesar la solicitud.");
+        });
+    });
     
-    try {
-      // Iniciar una transacción
-      await connection.beginTransaction();
-  
-      // 1. Verificar que la categoría exista
-      const [categoriaRows] = await connection.execute(
-        'SELECT * FROM Categoria WHERE Id_Categoria = ?', 
-        [idCategoria]
-      );
-      if (categoriaRows.length === 0) {
-        await connection.rollback();
-        return res.status(404).json({ error: 'La categoría no existe.' });
-      }
-  
-      // 2. Verificar que el proveedor exista
-      const [proveedorRows] = await connection.execute(
-        'SELECT * FROM Proveedor WHERE Id_Proveedor = ?', 
-        [idProveedor]
-      );
-      if (proveedorRows.length === 0) {
-        await connection.rollback();
-        return res.status(404).json({ error: 'El proveedor no existe.' });
-      }
-  
-      // 3. Verificar que la talla exista
-      const [tallaRows] = await connection.execute(
-        'SELECT * FROM Talla WHERE Id_Talla = ?', 
-        [idTalla]
-      );
-      if (tallaRows.length === 0) {
-        await connection.rollback();
-        return res.status(404).json({ error: 'La talla no existe.' });
-      }
-  
-      // 4. Insertar el producto
-      const [productoResult] = await connection.execute(
-        'INSERT INTO Producto (Nombre, Descripcion, Id_Categoria, Id_Proveedor, Imagen) VALUES (?, ?, ?, ?, ?)', 
-        [nombreProducto, descripcion, idCategoria, idProveedor, imagenProducto]
-      );
-      const idProducto = productoResult.insertId;
-  
-      // 5. Insertar en Producto_Talla
-      await connection.execute(
-        'INSERT INTO Producto_Talla (Precio, Stock, Id_Producto, Id_Talla) VALUES (?, ?, ?, ?)', 
-        [precio, cantidad, idProducto, idTalla]
-      );
-  
-      // Confirmar la transacción
-      await connection.commit();
-  
-      res.status(201).json({ 
-        mensaje: 'Producto guardado correctamente', 
-        idProducto: idProducto 
-      });
-  
-    } catch (error) {
-      // En caso de error, revertir la transacción
-      await connection.rollback();
-      console.error('Error al agregar producto:', error);
-      res.status(500).json({ error: 'Error interno del servidor' });
-    } finally {
-      // Liberar la conexión
-      connection.release();
-    }
-  });
     
 });
 
