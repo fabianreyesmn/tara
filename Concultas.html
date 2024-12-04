@@ -1,11 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tara</title>
-</head>
+<html>
 <body>
-    <h1>Consultas Cesar</h1>
+    <input type="file" id="fileInput" accept="image/*">
+    <button id="uploadButton">Subir Imagen</button>
+
+    <script>
+      // Obtener elementos del DOM
+      const fileInput = document.getElementById('fileInput');
+      const uploadButton = document.getElementById('uploadButton');
+
+      // Función para manejar la subida de archivos
+      uploadButton.addEventListener('click', () => {
+        const file = fileInput.files[0]; // Obtener el archivo seleccionado
+
+        if (!file) {
+          alert('Por favor, selecciona una imagen primero');
+          return;
+        }
+
+        // Crear un FormData para enviar el archivo
+        const formData = new FormData();
+        formData.append('imagen', file); // El nombre 'imagen' debe coincidir con el que se usa en el servidor
+
+        // Realizar la solicitud de subida
+        fetch('http://localhost:3000/upload', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.filename) {
+            alert('Imagen subida exitosamente: ' + data.filename);
+          } else {
+            alert('Error al subir la imagen');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Hubo un error al subir la imagen');
+        });
+      });
+    </script>
 </body>
 </html>
