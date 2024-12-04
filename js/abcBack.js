@@ -172,6 +172,56 @@ document.addEventListener('DOMContentLoaded', function() {
         } 
         document.getElementById('nombreCategoria').value = '';
     });
+
+    document.querySelector('form.formulario[id^="formProducto"]').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Prepare form data
+        const formData = new FormData(this);
+        const imagenInput = document.getElementById('imagenProducto');
+        
+        // Convert form data to an object
+        const productoData = {
+            nombreProducto: document.getElementById('nombreProducto').value.trim(),
+            descripcion: document.getElementById('descripcion').value.trim(),
+            idCategoria: document.getElementById('idCategoria').value.trim(),
+            idProveedor: document.getElementById('idProveedor').value.trim(),
+            idTalla: document.getElementById('idTalla').value.trim(),
+            cantidad: document.getElementById('cantidad').value.trim(),
+            precio: document.getElementById('precio').value.trim(),
+            imagenProducto: '' // We'll handle image upload separately if needed
+        };
+
+        // Validate fields
+        const requiredFields = Object.values(productoData);
+        if (requiredFields.some(field => field === '')) {
+            alert('Por favor, complete todos los campos.');
+            return;
+        }
+
+        // Send data to backend
+        fetch('http://localhost:3000/addProducto', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productoData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                alert(data.mensaje);
+                // Reset form
+                this.reset();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Hubo un error al procesar la solicitud.");
+        });
+    });
     
 });
 
