@@ -139,6 +139,39 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('correo').value = '';
         document.getElementById('nacionalidad').value = '';
     });
+
+
+
+    document.querySelector('form[id^="formCategoria"]').addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        let nombreCategoria = document.getElementById('nombreCategoria').value.trim();
+    
+        if (nombreCategoria === '') {
+            alert("Por favor, ingrese un nombre de categoría válido.");
+        } else {
+            fetch('http://localhost:3000/addCategoria', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombreCategoria: nombreCategoria })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    alert(data.mensaje);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Hubo un error al procesar la solicitud.");
+            });
+        } 
+        document.getElementById('nombreCategoria').value = '';
+    });
     
 });
 
