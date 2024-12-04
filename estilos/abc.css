@@ -141,7 +141,7 @@ div.formularios {
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 /* botonees */
-.boton-enviar {
+.boton-enviar, .boton-enviarB {
   background-color: #000000;
   color: #ffffff;
   border: none;
@@ -154,7 +154,7 @@ div.formularios {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para el botón */
 }
 
-.boton-enviar:hover {
+.boton-enviar:hover, .boton-enviarB:hover {
   background-color: #333333;
 }
 

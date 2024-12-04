@@ -140,8 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('nacionalidad').value = '';
     });
 
-
-
     document.querySelector('form[id^="formCategoria"]').addEventListener('submit', function(event) {
         event.preventDefault();
     
@@ -172,6 +170,47 @@ document.addEventListener('DOMContentLoaded', function() {
         } 
         document.getElementById('nombreCategoria').value = '';
     });
+
+    document.querySelector('.boton-enviarB').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevenir el envío del formulario por defecto
+    
+        // // Obtener los valores de los campos
+        const nombreTabla = document.getElementById('nombreProductoB').value.trim();
+        const nombreElemento = document.getElementById('idBaja').value.trim();
+
+        // // Verificar que los valores no estén vacíos
+        if (!nombreTabla || !nombreElemento) {
+          alert('Por favor, seleccione una tabla y un nombre de elemento.');
+          return;
+        }
+    
+        // // Crear el objeto con los datos
+        const data = {
+          nombreTabla: nombreTabla,
+          nombreElemento: nombreElemento
+        };
+    
+        // // Enviar los datos al servidor con fetch
+        fetch('http://localhost:3000/bajaLogica', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+          if (result.mensaje) {
+            alert(result.mensaje);
+          } else if (result.error) {
+            alert(result.error);
+          }
+        })
+        .catch(error => {
+          console.error('Error al enviar la solicitud:', error);
+          alert('Hubo un problema con la solicitud.');
+        });
+      });
     
 });
 
