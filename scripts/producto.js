@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const prod = await window.api.obtProd(idProd);
         mostrarProd(prod);
+        cargarProds();
     } catch (err) {
         console.error('Error:', err);
         document.getElementById('prod-cont').innerHTML = '<p class="error">Error al cargar producto</p>';
