@@ -100,9 +100,9 @@
         
                 <button class="accordion">Nacionalidad</button>
                 <div class="panel">
-                    <form class="formulario">
+                    <form class="formulario" id="formNacionalidad">
                       <div class="campo">
-                        <input type="text" id="nombreNacionalida" name="nombreNacionalidad" placeholder="Nacinalidad" required>
+                        <input type="text" id="nombreNacionalidad" name="nombreNacionalidad" placeholder="Nacionalidad" required pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras y espacios.">
                       </div>
                         <button type="submit" class="boton-enviar">Guardar </button>
                     </form>

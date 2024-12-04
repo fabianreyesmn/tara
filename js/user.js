@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 'correo', label: 'Correo', type: 'email', class: 'sucnac' },
         { id: 'direccion', label: 'Dirección', type: 'text', class: 'sucnac' },
         { id: 'nacionalidad', label: 'Nacionalidad', type: 'text', class: 'sucnac' },
-        { id: 'telefono', label: 'Teléfono', type: 'number', class: 'sucnac' }
+        { id: 'telefono', label: 'Teléfono', type: 'number', class: 'sucnac' },
+        { id: 'genero', label: 'Sexo', type: 'text', class: 'sucnac', pattern: '.{1}'}
     ];
     const camposEmpleado = [
         { id: 'nombre', label: 'Nombre', type: 'text', class: 'sucnac' },
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             div.classList.add('input-container');
             div.innerHTML = `
                 <label for="${campo.id}">${campo.label}</label>
-                <input type="${campo.type}" id="${campo.id}" name="${campo.id}" class="${campo.class}" required disabled>
+                <input type="${campo.type}" id="${campo.id}" name="${campo.id}" class="${campo.class}" pattern="${campo.pattern}" required disabled>
             `;
             camposUsuario.appendChild(div);
         });
@@ -120,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 datos.direccion = document.querySelector('input[name="direccion"]').value;
                 datos.nacionalidad = document.querySelector('input[name="nacionalidad"]').value;
                 datos.telefono = document.querySelector('input[name="telefono"]').value;
+                datos.genero = document.querySelector('input[name="genero"]').value.trim() || 'N';
                 datos.tipoUsuario = tipoUsuario;
             }
 
@@ -192,6 +194,14 @@ document.addEventListener('DOMContentLoaded', function() {
             telefono,
             /^\d{10}$/,
             'El teléfono debe tener 10 dígitos numéricos.',
+            true
+        ) && esValido;
+
+        const genero = document.querySelector('input[name="genero"]');
+        esValido = validarCampo(
+            genero, 
+            /^[MF]$/,
+            'El valor debe ser "M" o "F".',
             true
         ) && esValido;
 
