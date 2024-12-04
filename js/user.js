@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 'correo', label: 'Correo', type: 'email', class: 'sucnac' },
         { id: 'direccion', label: 'Dirección', type: 'text', class: 'sucnac' },
         { id: 'nacionalidad', label: 'Nacionalidad', type: 'text', class: 'sucnac' },
-        { id: 'telefono', label: 'Teléfono', type: 'number', class: 'sucnac' },
+        { id: 'telefono', label: 'Teléfono', type: 'text', class: 'sucnac', pattern: '[0-9]{3}-[0-9]{3}-[0-9]{4}'},
         { id: 'genero', label: 'Sexo', type: 'text', class: 'sucnac', pattern: '.{1}'}
     ];
     const camposEmpleado = [
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 'direccion', label: 'Dirección', type: 'text', class: 'sucnac'},
         { id: 'sucursal', label: 'Sucursal', type: 'text' },
         { id: 'sueldo', label: 'Sueldo', type: 'number'},
-        { id: 'telefono', label: 'Teléfono', type: 'number', class: 'sucnac'}
+        { id: 'telefono', label: 'Teléfono', type: 'text', class: 'sucnac', pattern: '[0-9]{3}-[0-9]{3}-[0-9]{4}'},
     ];
 
     function generarCampos(campos) {
@@ -192,16 +192,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const telefono = document.querySelector('input[name="telefono"]');
         esValido = validarCampo(
             telefono,
-            /^\d{10}$/,
-            'El teléfono debe tener 10 dígitos numéricos.',
-            true
-        ) && esValido;
-
-        const genero = document.querySelector('input[name="genero"]');
-        esValido = validarCampo(
-            genero, 
-            /^[MF]$/,
-            'El valor debe ser "M" o "F".',
+            /^\d{3}-\d{3}-\d{4}$/,
+            'El teléfono debe tener el formato 000-000-0000.',
             true
         ) && esValido;
 
@@ -222,6 +214,13 @@ document.addEventListener('DOMContentLoaded', function() {
         ) && esValido;
 
         if (tipoUsuario === 'cliente') {
+            const genero = document.querySelector('input[name="genero"]');
+            esValido = validarCampo(
+                genero, 
+                /^[MF]$/,
+                'El valor debe ser "M" o "F".',
+                true
+            ) && esValido;
             const nacionalidad = document.querySelector('input[name="nacionalidad"]');
             esValido = validarCampo(
                 nacionalidad,
