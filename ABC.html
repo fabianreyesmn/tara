@@ -50,29 +50,30 @@
         
                 <button class="accordion">Proveedor</button>
                 <div class="panel">
-                    <form class="formulario">
+                    <form class="formulario" id="formProveedor">
                       <div class="campo">
-                          <input type="text" id="nombrePrvedor" name="nombreProvedor" placeholder="Nombre del Proveedor" required>
+                          <input type="text" id="nombrePrvedor" name="nombreProvedor" placeholder="Nombre del Proveedor" pattern="[A-Za-zÀ-ÿ\s]+" maxlength="49"  required>
                       </div>
                       <div class="campo">
-                          <input type="text" id="apellidop" name="apellidop" placeholder="Apellido Paterno" required>
+                          <input type="text" id="apellidop" name="apellidop" placeholder="Apellido Paterno" pattern="[A-Za-zÀ-ÿ\s]+" maxlength="49" required>
                       </div>
                       <div class="campo">
-                        <input type="text" id="apellidom" name="apellidom" placeholder="Apellido Materno" required>
+                        <input type="text" id="apellidom" name="apellidom" placeholder="Apellido Materno" pattern="[A-Za-zÀ-ÿ\s]+" maxlength="49" required>
                       </div>
                       <div class="campo">
-                          <input type="text" id="direccion" name="direccion" placeholder="Direccion" required>
+                          <input type="text" id="direccion" name="direccion" placeholder="Direccion" pattern="[A-Za-zÀ-ÿ\s]+" maxlength="99" required>
                       </div>
                       <div class="campo">
                         <input type="tel" id="telefono" name="telefono" placeholder="Teléfono (Ej. 123-456-7890)" 
-                              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
-                              title="El formato debe ser 123-456-7890" required>
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                            title="El formato debe ser 123-456-7890" required>
                       </div>
                        <div class="campo">
-                        <input type="email" id="correo" name="correo" placeholder="Correo Electrónico" required>
+                        <input type="email" id="correo" name="correo" placeholder="Correo Electrónico" maxlength="50" 
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,}"   required>
                       </div>
                       <div class="campo">
-                        <input type="text" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad" required>
+                        <input type="text" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad"  maxlength="30" required>
                       </div>
                         <button type="submit" class="boton-enviar">Guardar </button>
                     </form>
@@ -90,11 +91,29 @@
 
                 <button class="accordion">Talla</button>
                 <div class="panel">
-                    <form class="formulario">
+                    <form class="formulario"  id="formTalla">
                         <div class="campo">
-                            <input type="text" id="nombreTalla" name="nombreTalla" placeholder="Nombre de la talla" required>
+                            <input 
+                                type="text" 
+                                id="nombreTalla" 
+                                name="nombreTalla" 
+                                placeholder="Nombre de la talla" 
+                                required 
+                                maxlength="20" 
+                                pattern="[A-Za-zÀ-ÿ\s]+" 
+                                title="El nombre de la talla debe tener solo letras y espacios, y no más de 20 caracteres.">
                         </div>
-                            <button type="submit" class="boton-enviar">Guardar </button>
+                        <div class="campo">
+                            <input 
+                                type="text" 
+                                id="descripcionTalla" 
+                                name="descripcionTalla" 
+                                placeholder="Descripción" 
+                                required 
+                                maxlength="255" 
+                                title="La descripción no debe superar los 255 caracteres.">
+                        </div>
+                        <button type="submit" class="boton-enviar">Guardar </button>
                     </form>
                 </div>
         
@@ -102,7 +121,7 @@
                 <div class="panel">
                     <form class="formulario" id="formNacionalidad">
                       <div class="campo">
-                        <input type="text" id="nombreNacionalidad" name="nombreNacionalidad" placeholder="Nacionalidad" required pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras y espacios.">
+                        <input type="text" id="nombreNacionalidad" name="nombreNacionalidad" maxlength="30" placeholder="Nacionalidad" required pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras y espacios.">
                       </div>
                         <button type="submit" class="boton-enviar">Guardar </button>
                     </form>
