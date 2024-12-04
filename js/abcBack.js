@@ -188,6 +188,7 @@ app.post('/addProducto', async (req, res) => {
   
     const connection = await pool.getConnection();
   
+    
     try {
       // Iniciar una transacción
       await connection.beginTransaction();
