@@ -21,88 +21,31 @@
                 <div class="panel">
                     <form class="formulario">
                         <div class="campo">
-                            <input type="text" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" required
-                            required maxlength="50" title="No puede exceder mas de 50 caracteres">
+                            <input type="text" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" required>
                         </div>
                         <div class="campo">
-                            <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto"
-                            maxlength="200" title="No puede exceder 200 caracteres."></textarea>
+                            <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto" required></textarea>
                         </div>
                         <div class="campo">
-                            <input type="text" id="idCategoria" name="idCategoria" placeholder="ID Categoría" required
-                            required pattern="\d{1,11}" title="Solo números, máximo 11 caracteres.">
+                            <input type="text" id="idCategoria" name="idCategoria" placeholder="ID Categoría" required>
                         </div>
                         <div class="campo">
-                            <input type="text" id="idProveedor" name="idProveedor" placeholder="ID Proveedor" required
-                            required pattern="\d{1,11}" title="Solo números, máximo 11 caracteres.">
+                            <input type="text" id="idProveedor" name="idProveedor" placeholder="ID Proveedor" required>
                         </div>
                         <div class="campo">
-                            <input type="text" id="idTalla" name="idTalla" placeholder="ID Talla" required
-                            required pattern="\d{1,11}" title="Solo números, máximo 11 caracteres.">
+                            <input type="text" id="idTalla" name="idTalla" placeholder="ID Talla" required>
                         </div>
                         <div class="campo">
-                            <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" required
-                            required pattern="\d{1,11}" title="Solo números, máximo 11 caracteres.">
+                            <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" required>
                         </div>
                         <div class="campo">
-                            <input type="number" id="precio" name="precio" placeholder="Precio" step="0.01" required
-                            required pattern="\d{1,11}" title="Solo números, máximo 11 caracteres.">
+                            <input type="number" id="precio" name="precio" placeholder="Precio" step="0.01" required>
                         </div>
                         <div class="campo">
-                          <input type="file" id="imagenProducto" name="imagenProducto" accept="image/*"  required>
-                      </div>
+                            <input type="file" id="imagenProducto" name="imagenProducto" accept="image/*"  required>
+                        </div>
                         <button type="submit" class="boton-enviar">Guardar</button>
                     </form>
-                </div> 
-        
-                <button class="accordion">Proveedor</button>
-                <div class="panel">
-                    <form class="formulario">
-                      <div class="campo">
-                          <input type="text" id="nombrePrvedor" name="nombreProvedor" placeholder="Nombre del Proveedor" required>
-                      </div>
-                      <div class="campo">
-                          <input type="text" id="apellidop" name="apellidop" placeholder="Apellido Paterno" required>
-                      </div>
-                      <div class="campo">
-                        <input type="text" id="apellidom" name="apellidom" placeholder="Apellido Materno" required>
-                      </div>
-                      <div class="campo">
-                          <input type="text" id="direccion" name="direccion" placeholder="Direccion" required>
-                      </div>
-                      <div class="campo">
-                        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono (Ej. 123-456-7890)" 
-                              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
-                              title="El formato debe ser 123-456-7890" required>
-                      </div>
-                       <div class="campo">
-                        <input type="email" id="correo" name="correo" placeholder="Correo Electrónico" required>
-                      </div>
-                      <div class="campo">
-                        <input type="text" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad" required>
-                      </div>
-                        <button type="submit" class="boton-enviar">Guardar </button>
-                    </form>
-                </div>
-        
-                <button class="accordion">Categoría</button>
-                <div class="panel">
-                    <form class="formulario">
-                      <div class="campo">
-                        <input type="text" id="nombreCategoria" name="nombreCategoria" placeholder="Nombre del Categoria" required
-                        required maxlength="11">
-                      </div>
-                        <button type="submit" class="boton-enviar">Guardar </button>
-                    </form>
-                </div>
-                <button class="accordion">Talla</button>
-                <div class="panel">
-                  <form class="formulario">
-                    <div class="campo">
-                      <input type="text" id="nombreTalla" name="nombreTalla" placeholder="Nombre de la talla" required>
-                    </div>
-                      <button type="submit" class="boton-enviar">Guardar </button>
-                  </form>
                 </div>
         
                 <button class="accordion">Proveedor</button>
@@ -140,7 +83,7 @@
                 <div class="panel">
                     <form class="formulario">
                       <div class="campo">
-                        <input type="text" id="nombreCategoria" name="nombreCategoria" placeholder="Nombre de la Categoria" required>
+                        <input type="text" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" required>
                       </div>
                         <button type="submit" class="boton-enviar">Guardar </button>
                     </form>
