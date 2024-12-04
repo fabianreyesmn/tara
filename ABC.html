@@ -21,29 +21,36 @@
                 <div class="panel">
                     <form class="formulario">
                         <div class="campo">
-                            <input type="text" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" required>
+                            <input type="text" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" required
+                            required maxlength="50" title="No puede exceder mas de 50 caracteres">
                         </div>
                         <div class="campo">
-                            <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto" required></textarea>
+                            <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto"
+                            maxlength="200" title="No puede exceder 200 caracteres."></textarea>
                         </div>
                         <div class="campo">
-                            <input type="text" id="idCategoria" name="idCategoria" placeholder="ID Categoría" required>
+                            <input type="text" id="idCategoria" name="idCategoria" placeholder="ID Categoría" required
+                            required pattern="\d{1,11}" title="Solo números, máximo 11 caracteres.">
                         </div>
                         <div class="campo">
-                            <input type="text" id="idProveedor" name="idProveedor" placeholder="ID Proveedor" required>
+                            <input type="text" id="idProveedor" name="idProveedor" placeholder="ID Proveedor" required
+                            required pattern="\d{1,11}" title="Solo números, máximo 11 caracteres.">
                         </div>
                         <div class="campo">
-                            <input type="text" id="idTalla" name="idTalla" placeholder="ID Talla" required>
+                            <input type="text" id="idTalla" name="idTalla" placeholder="ID Talla" required
+                            required pattern="\d{1,11}" title="Solo números, máximo 11 caracteres.">
                         </div>
                         <div class="campo">
-                            <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" required>
+                            <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" required
+                            required pattern="\d{1,11}" title="Solo números, máximo 11 caracteres.">
                         </div>
                         <div class="campo">
-                            <input type="number" id="precio" name="precio" placeholder="Precio" step="0.01" required>
+                            <input type="number" id="precio" name="precio" placeholder="Precio" step="0.01" required
+                            required pattern="\d{1,11}" title="Solo números, máximo 11 caracteres.">
                         </div>
                         <div class="campo">
-                            <input type="file" id="imagenProducto" name="imagenProducto" accept="image/*"  required>
-                        </div>
+                          <input type="file" id="imagenProducto" name="imagenProducto" accept="image/*"  required>
+                      </div>
                         <button type="submit" class="boton-enviar">Guardar</button>
                     </form>
                 </div>
@@ -83,7 +90,7 @@
                 <div class="panel">
                     <form class="formulario">
                       <div class="campo">
-                        <input type="text" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" required>
+                        <input type="text" id="nombreCategoria" name="nombreCategoria" placeholder="Nombre de Categoria" required>
                       </div>
                         <button type="submit" class="boton-enviar">Guardar </button>
                     </form>
