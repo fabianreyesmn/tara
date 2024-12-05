@@ -158,16 +158,18 @@
                 <div class="baj">
                     <h2>Bajas</h2>
                     <div class="campoD">
-                      <select id="nombreProductoB" name="nombreProductoB" required>
-                          <option value="" disabled selected>Seleccione una opccion  </option>
+                        <select id="nombreProductoB" name="nombreProductoB" required onchange="mostrarCampos()">
+                          <option value="" disabled selected>Seleccione una opción</option>
                           <option value="Producto">Producto</option>
                           <option value="Proveedor">Proveedor</option>
                           <option value="Categoria">Categoria</option>
-                      </select> 
-                    </div>
-                    <div class="campo">
-                        <input type="text" id="idBaja" name="idBaja" placeholder="Id" required>
-                    </div>
+                        </select>
+                      </div>
+                    
+                      <!-- Contenedor dinámico donde se muestran los campos -->
+                      <div class="campo" id="contenedorCampos">
+                        <!-- Campos dinámicos se insertarán aquí -->
+                      </div>
                     <button type="submit" class="boton-enviarB">Buscar</button>
                 </div>
             </div>

@@ -171,24 +171,74 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('nombreCategoria').value = '';
     });
 
-    document.querySelector('.boton-enviarB').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevenir el envío del formulario por defecto
+    // document.querySelector('.boton-enviarB').addEventListener('click', function(event) {
+    //     event.preventDefault(); // Prevenir el envío del formulario por defecto
     
-        // // Obtener los valores de los campos
-        const nombreTabla = document.getElementById('nombreProductoB').value.trim();
-        const nombreElemento = document.getElementById('idBaja').value.trim();
+    //     // // Obtener los valores de los campos
+    //     const nombreTabla = document.getElementById('nombreProductoB').value.trim();
+    //     const nombreElemento = document.getElementById('idBaja').value.trim();
 
-        // // Verificar que los valores no estén vacíos
-        if (!nombreTabla || !nombreElemento) {
-          alert('Por favor, seleccione una tabla y un nombre de elemento.');
-          return;
-        }
+    //     // // Verificar que los valores no estén vacíos
+    //     if (!nombreTabla || !nombreElemento) {
+    //       alert('Por favor, seleccione una tabla y un nombre de elemento.');
+    //       return;
+    //     }
     
         // // Crear el objeto con los datos
-        const data = {
-          nombreTabla: nombreTabla,
-          nombreElemento: nombreElemento
-        };
+    //   });   
+
+    document.querySelector('.boton-enviarB').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevenir el envío del formulario por defecto
+    
+        // Obtener la tabla seleccionada
+        const nombreTabla = document.getElementById('nombreProductoB').value.trim();
+        if (!nombreTabla) {
+            alert('Por favor, seleccione una tabla.');
+            return;
+        }
+    
+        // Recoger dinámicamente los datos según la opción seleccionada
+        let datos = {};
+        if (nombreTabla === "Producto") {
+            const nombreProducto = document.getElementById('productoInput')?.value.trim();
+            if (!nombreProducto) {
+                alert('Por favor, ingrese el nombre del producto.');
+                return;
+            }
+            datos = { 
+                nombreTabla: "Producto", 
+                nombreElemento: nombreProducto, 
+                apellidoP: "-",
+                apellidoM: "-" };
+        } else if (nombreTabla === "Categoria") {
+            const nombreCategoria = document.getElementById('categoriaInput')?.value.trim();
+            if (!nombreCategoria) {
+                alert('Por favor, ingrese el nombre de la categoría.');
+                return;
+            }
+            datos = { 
+                nombreTabla: "Categoria", 
+                nombreElemento: nombreCategoria, 
+                apellidoP: "-",
+                apellidoM: "-" };
+        } else if (nombreTabla === "Proveedor") {
+            const nombreProveedor = document.getElementById('nombreProveedor')?.value.trim();
+            const apellidoPaterno = document.getElementById('apellidoPaterno')?.value.trim();
+            const apellidoMaterno = document.getElementById('apellidoMaterno')?.value.trim();
+            if (!nombreProveedor || !apellidoPaterno || !apellidoMaterno) {
+                alert('Por favor, complete todos los datos del proveedor (nombre y apellidos).');
+                return;
+            }
+            datos = {
+                nombreTabla: "Proveedor",
+                nombreElemento: nombreProveedor,
+                apellidoP: apellidoPaterno,
+                apellidoM: apellidoMaterno
+            };
+        }
+    
+        // Imprimir los datos en la consola
+        console.log("Datos ingresados:", datos);
     
         // // Enviar los datos al servidor con fetch
         fetch('http://localhost:3000/bajaLogica', {
@@ -196,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(data)
+          body: JSON.stringify(datos)
         })
         .then(response => response.json())
         .then(result => {
@@ -210,7 +260,65 @@ document.addEventListener('DOMContentLoaded', function() {
           console.error('Error al enviar la solicitud:', error);
           alert('Hubo un problema con la solicitud.');
         });
-      });
+    });
     
+
 });
+
+
+function mostrarCampos() {
+    const contenedor = document.getElementById("contenedorCampos");
+    const seleccion = document.getElementById("nombreProductoB").value;
+
+    contenedor.innerHTML = "";
+
+    if (seleccion === "Producto") {
+      // Campo para Producto
+      const inputProducto = document.createElement("input");
+      inputProducto.type = "text";
+      inputProducto.id = "productoInput";
+      inputProducto.name = "productoInput";
+      inputProducto.placeholder = "Nombre del Producto";
+      inputProducto.required = true;
+      contenedor.appendChild(inputProducto);
+    } else if (seleccion === "Categoria") {
+      // Campo para Categoría
+      const inputCategoria = document.createElement("input");
+      inputCategoria.type = "text";
+      inputCategoria.id = "categoriaInput";
+      inputCategoria.name = "categoriaInput";
+      inputCategoria.placeholder = "Nombre de la Categoría";
+      inputCategoria.required = true;
+      contenedor.appendChild(inputCategoria);
+    } else if (seleccion === "Proveedor") {
+      // Campos para Proveedor
+      const inputNombre = document.createElement("input");
+      inputNombre.type = "text";
+      inputNombre.id = "nombreProveedor";
+      inputNombre.name = "nombreProveedor";
+      inputNombre.placeholder = "Nombre del Proveedor";
+      inputNombre.style.margin = "5px 0";
+      inputNombre.required = true;
+
+      const inputApellidoPaterno = document.createElement("input");
+      inputApellidoPaterno.type = "text";
+      inputApellidoPaterno.id = "apellidoPaterno";
+      inputApellidoPaterno.name = "apellidoPaterno";
+      inputApellidoPaterno.placeholder = "Apellido Paterno";
+      inputApellidoPaterno.style.margin = "5px 0";
+      inputApellidoPaterno.required = true;
+
+      const inputApellidoMaterno = document.createElement("input");
+      inputApellidoMaterno.type = "text";
+      inputApellidoMaterno.id = "apellidoMaterno";
+      inputApellidoMaterno.name = "apellidoMaterno";
+      inputApellidoMaterno.placeholder = "Apellido Materno";
+      inputApellidoMaterno.style.margin = "5px 0";
+      inputApellidoMaterno.required = true;
+
+      contenedor.appendChild(inputNombre);
+      contenedor.appendChild(inputApellidoPaterno);
+      contenedor.appendChild(inputApellidoMaterno);
+    }
+}
 
