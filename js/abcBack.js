@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
    var acc = document.getElementsByClassName("accordion");
     for (var i = 0; i < acc.length; i++) {
@@ -27,14 +28,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({ nacionalidad: nombreNacionalidad })
             })
-            .then(response => response.json()) // Parsear la respuesta a JSON
+            .then(response => response.json()) 
             .then(data => {
                 if (data.error) {
-                    // Si hay un error (por ejemplo, nacionalidad ya existe)
-                    alert(data.error); // Muestra el error recibido desde el backend
+            
+                    alert(data.error); 
                 } else {
-                    // Si no hay error, es porque la nacionalidad se guardó correctamente
-                    alert(data.mensaje); // Muestra el mensaje de éxito
+                 
+                    alert(data.mensaje); 
                 }
             })
             .catch(error => {
@@ -62,14 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({ talla: nombreTalla, descripcion: descripcionTalla })
             })
-            .then(response => response.json()) // Parsear la respuesta a JSON
+            .then(response => response.json()) 
             .then(data => {
                 if (data.error) {
-                    // Si hay un error (por ejemplo, nacionalidad ya existe)
+                 
                     alert(data.error); // Muestra el error recibido desde el backend
                 } else {
-                    // Si no hay error, es porque la nacionalidad se guardó correctamente
-                    alert(data.mensaje); // Muestra el mensaje de éxito
+                 
+                    alert(data.mensaje); 
                 }
             })
             .catch(error => {
@@ -115,14 +116,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 nacionalidad
             })
         })
-        .then(response => response.json()) // Parsear la respuesta a JSON
+        .then(response => response.json()) 
         .then(data => {
             if (data.error) {
-                // Si hay un error (por ejemplo, proveedor ya existe)
-                alert(data.error); // Muestra el error recibido desde el backend
+            
+                alert(data.error); 
             } else {
-                // Si no hay error, es porque el proveedor se guardó correctamente
-                alert(data.mensaje); // Muestra el mensaje de éxito
+            
+                alert(data.mensaje); 
             }
         })
         .catch(error => {
@@ -173,40 +174,62 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('nombreCategoria').value = '';
     });
 
-    // Agregar Producto
-    document.querySelector('form.formulario[id^="formProducto"]').addEventListener('submit', function(event) {
+    document.querySelector('form[id="formProducto"]').addEventListener('submit', function(event) {
         event.preventDefault();
-
-        // Prepare form data
-        const formData = new FormData(this);
-        const imagenInput = document.getElementById('imagenProducto');
-        
-        // Convert form data to an object
-        const productoData = {
-            nombreProducto: document.getElementById('nombreProducto').value.trim(),
-            descripcion: document.getElementById('descripcion').value.trim(),
-            idCategoria: document.getElementById('idCategoria').value.trim(),
-            idProveedor: document.getElementById('idProveedor').value.trim(),
-            idTalla: document.getElementById('idTalla').value.trim(),
-            cantidad: document.getElementById('cantidad').value.trim(),
-            precio: document.getElementById('precio').value.trim(),
-            imagenProducto: '' // We'll handle image upload separately if needed
-        };
-
-        // Validate fields
-        const requiredFields = Object.values(productoData);
-        if (requiredFields.some(field => field === '')) {
-            alert('Por favor, complete todos los campos.');
+    
+        // Obtener valores del formulario
+        let nombreProducto = document.getElementById('nombreProducto').value.trim();
+        let descripcion = document.getElementById('descripcion').value.trim();
+        let idCategoria = document.getElementById('idCategoria').value.trim();
+        let idProveedor = document.getElementById('idProveedor').value.trim();
+        let idTalla = document.getElementById('idTalla').value.trim();
+        let cantidad = document.getElementById('cantidad').value.trim();
+        let precio = document.getElementById('precio').value.trim();
+        let file = document.getElementById('imagenProducto').files[0];
+    
+        // Validar campos obligatorios
+        if (nombreProducto === '' || descripcion === '') {
+            alert("Por favor, complete todos los campos obligatorios.");
             return;
         }
+    
+        // Verificar que se haya seleccionado una imagen
+        if (!file) {
+            alert('Por favor, selecciona una imagen primero');
+            return;
+        }
+    
 
-        // Send data to backend
-        fetch('http://localhost:3000/addProducto', {
+ const formData = new FormData();
+formData.append('imagen', file);
+formData.append('nombreProducto', nombreProducto); 
+    
+        // Realizar la solicitud de subida
+        fetch('http://localhost:3000/upload', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(productoData)
+            body: formData
+        })
+        .then(response => response.json())
+        .then(imageData => {
+  
+            const productoData = {
+                nombreProducto,
+                descripcion,
+                idCategoria,
+                idProveedor,
+                idTalla,
+                cantidad,
+                precio,
+                imagen: imageData.filename 
+            };
+    
+            return fetch('http://localhost:3000/addProducto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productoData)
+            });
         })
         .then(response => response.json())
         .then(data => {
@@ -214,8 +237,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert(data.error);
             } else {
                 alert(data.mensaje);
-                // Reset form
-                this.reset();
+                // Limpiar formulario
+                document.getElementById('formProducto').reset();
             }
         })
         .catch(error => {
@@ -223,7 +246,6 @@ document.addEventListener('DOMContentLoaded', function() {
             alert("Hubo un error al procesar la solicitud.");
         });
     });
-    
     
 });
 
