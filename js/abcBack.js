@@ -141,8 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('nacionalidad').value = '';
     });
 
-
-
     document.querySelector('form[id^="formCategoria"]').addEventListener('submit', function(event) {
         event.preventDefault();
     
@@ -242,10 +240,67 @@ formData.append('nombreProducto', nombreProducto);
             }
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert("Hubo un error al procesar la solicitud.");
+          console.error('Error al enviar la solicitud:', error);
+          alert('Hubo un problema con la solicitud.');
         });
     });
     
 });
+
+
+function mostrarCampos() {
+    const contenedor = document.getElementById("contenedorCampos");
+    const seleccion = document.getElementById("nombreProductoB").value;
+
+    contenedor.innerHTML = "";
+
+    if (seleccion === "Producto") {
+      // Campo para Producto
+      const inputProducto = document.createElement("input");
+      inputProducto.type = "text";
+      inputProducto.id = "productoInput";
+      inputProducto.name = "productoInput";
+      inputProducto.placeholder = "Nombre del Producto";
+      inputProducto.required = true;
+      contenedor.appendChild(inputProducto);
+    } else if (seleccion === "Categoria") {
+      // Campo para Categoría
+      const inputCategoria = document.createElement("input");
+      inputCategoria.type = "text";
+      inputCategoria.id = "categoriaInput";
+      inputCategoria.name = "categoriaInput";
+      inputCategoria.placeholder = "Nombre de la Categoría";
+      inputCategoria.required = true;
+      contenedor.appendChild(inputCategoria);
+    } else if (seleccion === "Proveedor") {
+      // Campos para Proveedor
+      const inputNombre = document.createElement("input");
+      inputNombre.type = "text";
+      inputNombre.id = "nombreProveedor";
+      inputNombre.name = "nombreProveedor";
+      inputNombre.placeholder = "Nombre del Proveedor";
+      inputNombre.style.margin = "5px 0";
+      inputNombre.required = true;
+
+      const inputApellidoPaterno = document.createElement("input");
+      inputApellidoPaterno.type = "text";
+      inputApellidoPaterno.id = "apellidoPaterno";
+      inputApellidoPaterno.name = "apellidoPaterno";
+      inputApellidoPaterno.placeholder = "Apellido Paterno";
+      inputApellidoPaterno.style.margin = "5px 0";
+      inputApellidoPaterno.required = true;
+
+      const inputApellidoMaterno = document.createElement("input");
+      inputApellidoMaterno.type = "text";
+      inputApellidoMaterno.id = "apellidoMaterno";
+      inputApellidoMaterno.name = "apellidoMaterno";
+      inputApellidoMaterno.placeholder = "Apellido Materno";
+      inputApellidoMaterno.style.margin = "5px 0";
+      inputApellidoMaterno.required = true;
+
+      contenedor.appendChild(inputNombre);
+      contenedor.appendChild(inputApellidoPaterno);
+      contenedor.appendChild(inputApellidoMaterno);
+    }
+}
 
