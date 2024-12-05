@@ -1,47 +1,117 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8">
+    <meta  name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/6661c2c190.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="estilos/consultas.css" />
+    <title>Consultas TARA</title>
+    <script src="js/main.js" defer></script>
+  </head>
 <body>
-    <input type="text" placeholder="Nombre">
-    <input type="file" id="fileInput" accept="image/*">
-    <button id="uploadButton">Subir Imagen</button>
-    <img src="http://localhost:3000/images/producto_1733355871272.png" alt="...">
+  <div id="header-container"></div>
+  <div class="container">
+    <h1>Consultas</h1>
+    <div class="buttons-container">
+        <!-- Botones de control -->
+        <button onclick="mostrarSeccion(1)">Todos los Productos</button>
+        <button onclick="mostrarSeccion(2)">Precio mayor al promedio</button>
+        <button onclick="mostrarSeccion(3)">Precios mas Altos</button>
+        <button onclick="mostrarSeccion(4)">Precios mas Bajos</button>
+        <button onclick="mostrarSeccion(5)">Consulta 5</button>
+        <button onclick="mostrarSeccion(6)">Consulta 6</button>
+        <button onclick="mostrarSeccion(7)">Consulta 7</button>
+        <button onclick="mostrarSeccion(8)">Consulta 8</button>
+        <button onclick="mostrarSeccion(9)">Consulta 9</button>
+        <button onclick="mostrarSeccion(10)">Grafica</button>
+    </div>
+    <!-- VISTA TODOS LOS PRODUCTOS -->
+    <div id="seccion-1" class="flex">
+        <h2>Todos los Productos</h2>
+        <table id="productos1-table">
+            <thead>
+                <tr>
+                    <th>Id Producto</th>
+                    <th>Nombre Producto</th>
+                    <th>Descripción Producto</th>
+                    <th>Categoría</th>
+                    <th>Proveedor</th>
+                    <th>Talla</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se llenarán las filas de la tabla -->
+            </tbody>
+        </table>
+    </div>
+    <!-- VISTA TODOS LOS PRODUCTOS CON PRECIO MAYOR AL PROMEDIO -->
+    <div id="seccion-2" class="flex">
+      <h2>Productos con precio mayor al promedio</h2>
+      <table id="productos2-table">
+          <thead>
+              <tr>
+                  <th>Id Producto</th>
+                  <th>Nombre Producto</th>
+                  <th>Descripción Producto</th>
+                  <th>Categoría</th>
+                  <th>Proveedor</th>
+                  <th>Talla</th>
+                  <th>Precio</th>
+                  <th>Stock</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Aquí se llenarán las filas de la tabla -->
+          </tbody>
+      </table>
+    </div>
+    <!-- PRECIOS MAS ALTOS -->
+    <div id="seccion-3" class="flex">
+      <h2>Productos con el precio mas alto</h2>
+      <table id="productos3-table">
+          <thead>
+              <tr>
+                  <th>Id Producto</th>
+                  <th>Nombre Producto</th>
+                  <th>Descripción Producto</th>
+                  <th>Categoría</th>
+                  <th>Proveedor</th>
+                  <th>Talla</th>
+                  <th>Precio</th>
+                  <th>Stock</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Aquí se llenarán las filas de la tabla -->
+          </tbody>
+      </table>
+    </div>
 
-    <script>
-      // Obtener elementos del DOM
-      const fileInput = document.getElementById('fileInput');
-      const uploadButton = document.getElementById('uploadButton');
-
-      // Función para manejar la subida de archivos
-      uploadButton.addEventListener('click', () => {
-        const file = fileInput.files[0]; // Obtener el archivo seleccionado
-
-        if (!file) {
-          alert('Por favor, selecciona una imagen primero');
-          return;
-        }
-
-        // Crear un FormData para enviar el archivo
-        const formData = new FormData();
-        formData.append('imagen', file); // El nombre 'imagen' debe coincidir con el que se usa en el servidor
-
-        // Realizar la solicitud de subida
-        fetch('http://localhost:3000/upload', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.filename) {
-            alert('Imagen subida exitosamente: ' + data.filename);
-          } else {
-            alert('Error al subir la imagen');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('Hubo un error al subir la imagen');
-        });
-      });
-    </script>
+    <!-- PRECIOS MAS BAJOS -->
+    <div id="seccion-4" class="flex">
+      <h2>Productos con el precio mas abjo</h2>
+      <table id="productos4-table">
+          <thead>
+              <tr>
+                  <th>Id Producto</th>
+                  <th>Nombre Producto</th>
+                  <th>Descripción Producto</th>
+                  <th>Categoría</th>
+                  <th>Proveedor</th>
+                  <th>Talla</th>
+                  <th>Precio</th>
+                  <th>Stock</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Aquí se llenarán las filas de la tabla -->
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="footer-container"></div>
+  <script src="js/consultas.js"></script>
 </body>
 </html>
