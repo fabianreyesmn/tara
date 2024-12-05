@@ -6,10 +6,10 @@
     <script src="https://kit.fontawesome.com/6661c2c190.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="estilos/consultas.css" />
     <title>Consultas TARA</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/main.js" defer></script>
   </head>
 <body>
-<<<<<<< HEAD
   <div id="header-container"></div>
   <div class="container">
     <h1>Consultas</h1>
@@ -19,12 +19,10 @@
         <button onclick="mostrarSeccion(2)">Precio mayor al promedio</button>
         <button onclick="mostrarSeccion(3)">Precios mas Altos</button>
         <button onclick="mostrarSeccion(4)">Precios mas Bajos</button>
-        <button onclick="mostrarSeccion(5)">Consulta 5</button>
-        <button onclick="mostrarSeccion(6)">Consulta 6</button>
-        <button onclick="mostrarSeccion(7)">Consulta 7</button>
-        <button onclick="mostrarSeccion(8)">Consulta 8</button>
-        <button onclick="mostrarSeccion(9)">Consulta 9</button>
-        <button onclick="mostrarSeccion(10)">Grafica</button>
+        <button onclick="mostrarSeccion(5)">Grafica clientes</button>
+        <button onclick="mostrarSeccion(6)">Grafica Precios</button>
+        <button onclick="mostrarSeccion(7)">Stock &gt; 100 por categoria</button>
+        <button onclick="mostrarSeccion(8)">Stock &lt; 100 por categoria</button>
     </div>
     <!-- VISTA TODOS LOS PRODUCTOS -->
     <div id="seccion-1" class="flex">
@@ -89,7 +87,6 @@
           </tbody>
       </table>
     </div>
-
     <!-- PRECIOS MAS BAJOS -->
     <div id="seccion-4" class="flex">
       <h2>Productos con el precio mas abjo</h2>
@@ -111,50 +108,52 @@
           </tbody>
       </table>
     </div>
+    <!-- GRAFICA GENERO -->
+    <div id="seccion-5" class="flex">
+      <h2>Gráfica de Género</h2>
+      <div style="margin: auto;">
+          <canvas id="genderChart"></canvas>
+      </div>
+    </div>
+    <!-- GRAFICA PRECIOS -->
+    <div id="seccion-6" class="flex">
+      <h2>Gráfica Precios</h2>
+      <div style="margin: auto;">
+          <canvas id="precioChart"></canvas>
+      </div>
+    </div>
+    <!-- TABLA CATEGORIA CON STOCK > 100 -->
+    <div id="seccion-7" class="flex">
+      <h2>Total Stock por categoria</h2>
+      <table id="stockTableMayor">
+        <thead>
+          <tr>
+            <th>Categoría</th>
+            <th>Total de Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Los datos se llenarán dinámicamente aquí -->
+        </tbody>
+      </table>
+    </div>
+    <!-- TABLA CATEGORIA CON STOCK < 100 -->
+    <div id="seccion-8" class="flex">
+      <h2>Total Stock por categoria</h2>
+      <table id="stockTableMenor">
+        <thead>
+          <tr>
+            <th>Categoría</th>
+            <th>Total de Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Los datos se llenarán dinámicamente aquí -->
+        </tbody>
+      </table>
+    </div>
   </div>
   <div id="footer-container"></div>
   <script src="js/consultas.js"></script>
-=======
-    <input type="file" id="fileInput" accept="image/*">
-    <button id="uploadButton">Subir Imagen</button>
- 
-    <script>
-      // Obtener elementos del DOM
-      const fileInput = document.getElementById('fileInput');
-      const uploadButton = document.getElementById('uploadButton');
- 
-      // Función para manejar la subida de archivos
-      uploadButton.addEventListener('click', () => {
-        const file = fileInput.files[0]; // Obtener el archivo seleccionado
- 
-        if (!file) {
-          alert('Por favor, selecciona una imagen primero');
-          return;
-        }
- 
-        // Crear un FormData para enviar el archivo
-        const formData = new FormData();
-        formData.append('imagen', file); // El nombre 'imagen' debe coincidir con el que se usa en el servidor
- 
-        // Realizar la solicitud de subida
-        fetch('http://localhost:3000/upload', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.filename) {
-            alert('Imagen subida exitosamente: ' + data.filename);
-          } else {
-            alert('Error al subir la imagen');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('Hubo un error al subir la imagen');
-        });
-      });
-    </script>
->>>>>>> 6f85717ebf97cd8a28d1e7b4ed912d96e0492b1d
 </body>
 </html>

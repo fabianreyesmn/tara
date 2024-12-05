@@ -53,3 +53,8 @@ th, td {
 th {
     background-color: #f4f4f4;
 }
+.chart-container {
+    min-width: 500px;              /* Ajusta el contenedor al 80% del ancho */
+    height: 400px;           /* Puedes cambiar la altura a lo que necesites */
+    margin: 0 auto;          /* Centra el contenedor en la página */
+}
