@@ -89,6 +89,8 @@ function mostrarProds(prods) {
                 </div>
                 ${renderPrecio()}
                 <p>${p.Descripcion_P}</p>
+                <p><strong>Categoría:</strong> ${p.Categoria_P}</p>
+                <p><strong>Tallas:</strong> ${p.Tallas_P}</p>
             </div>
         `;
     }).join('');

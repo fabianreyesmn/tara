@@ -27,6 +27,8 @@ function mostrarProd(p) {
                 <p><i class="fa-solid fa-fingerprint"></i> ${p.ID_Producto}</p>
                 <p>${p.Descripcion_P}</p>
                 <p>${p.Existencias_P} unidades</p>
+                <p><strong>Categoría:</strong> ${p.Categoria_P}</p>
+                <p><strong>Tallas Disponibles:</strong> ${p.Tallas_P}</p>
                 ${p.Tiene_Descuento_P ? `
                     <div class="centrar-precio">
                         <p class="tachado"><i class="fa-solid fa-dollar-sign"></i> ${p.Precio_P}</p>
@@ -35,7 +37,6 @@ function mostrarProd(p) {
                 ` : `
                     <p><i class="fa-solid fa-dollar-sign"></i> ${p.Precio_P}</p>
                 `}
-               
                 <form id="agregar-car${p.ID_Producto}">
                     <input type="hidden" name="ID_Producto" value="${p.ID_Producto}">
                     ${isLoggedIn() ? `
@@ -52,6 +53,7 @@ function mostrarProd(p) {
         </div>`;
     document.getElementById('prod-cont').innerHTML = html;
 }
+
 
 async function cargarProds(filtros = {}) {
     try {
@@ -126,6 +128,8 @@ function mostrarProds(prods) {
                 </div>
                 ${renderPrecio()}
                 <p>${p.Descripcion_P}</p>
+                <p><strong>Categoría:</strong> ${p.Categoria_P}</p>
+                <p><strong>Tallas:</strong> ${p.Tallas_P}</p>
             </div>
         `;
     }).join('');
@@ -150,7 +154,14 @@ function agregarAlCarrito(idProd) {
         return;
     }
     try {
-        window.api.addCarr(idUsr, idProd);
+        window.api.addCarr(idUsr, idProd)
+            .then(response => {
+                alert('Producto agregado al carrito');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message);
+            });
     } catch (err) {
         console.error('Error:', err);
     }
