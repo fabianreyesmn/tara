@@ -30,12 +30,12 @@ async function obtProd(idProd) {
     }
 }
 
-async function addCarr(idUsr, idProd, cant = 1) {
+async function addCarr(nombreUsuario, idProd, idTalla) {
     try {
         const res = await fetch(`${API_URL}/carr/add`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ idUsr, idProd, cant }),
+            body: JSON.stringify({ nombreUsuario, idProd, idTalla }),
         });
         
         if (!res.ok) {
