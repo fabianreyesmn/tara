@@ -390,10 +390,10 @@ function mostrarCamposG() {
     if (seleccion === "Producto") {
         const inputProducto = document.createElement("input");
         inputProducto.type = "text";
-        inputProducto.id = "inputProducto";
+        inputProducto.id = "inputProductoNombre";
         inputProducto.name = "productoNombre";
         inputProducto.placeholder = "Nombre del Producto";
-        inputProducto.style.margin = "5px 0";
+        inputProducto.style.margin = "4px 0";
         inputProducto.required = true;
         contenedor.appendChild(inputProducto);
     } else if (seleccion === "Proveedor") {
@@ -427,6 +427,8 @@ function mostrarCamposG() {
     }
 }
 
+//funcion para select
+
 document.querySelector('.boton-enviarConsulta').addEventListener('click', function (event) {
     event.preventDefault();
 
@@ -437,7 +439,18 @@ document.querySelector('.boton-enviarConsulta').addEventListener('click', functi
     }
 
     let datos = {};
-    if (nombreTabla === "Proveedor") {
+    let endpoint = '';
+    if (nombreTabla === "Producto") {
+        const nombreProducto = document.getElementById('inputProductoNombre')?.value.trim();
+    
+        if (!nombreProducto) {
+            alert('Por favor, ingrese el nombre del producto.');
+            return;
+        }
+    
+        datos = { nombre: nombreProducto };
+        endpoint = 'http://localhost:3000/obtenerProducto'; // Change endpoint for Producto
+    } else if (nombreTabla === "Proveedor") {
         const nombreProveedor = document.getElementById('inputProveedorNombre')?.value.trim();
         const apellidoPaterno = document.getElementById('inputProveedorApellidoPaterno')?.value.trim();
         const apellidoMaterno = document.getElementById('inputProveedorApellidoMaterno')?.value.trim();
@@ -452,12 +465,13 @@ document.querySelector('.boton-enviarConsulta').addEventListener('click', functi
             apellidoPaterno: apellidoPaterno,
             apellidoMaterno: apellidoMaterno
         };
+        endpoint = 'http://localhost:3000/obtenerProveedor'; // Keep existing endpoint for Proveedor
     } else {
         alert('Actualmente solo se pueden consultar proveedores.');
         return;
     }
 
-    fetch('http://localhost:3000/obtenerProveedor', {
+    fetch(endpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -469,7 +483,11 @@ document.querySelector('.boton-enviarConsulta').addEventListener('click', functi
         if (result.error) {
             alert(result.error);
         } else {
-            mostrarDatosProveedor(result);
+            if (nombreTabla === "Producto") {
+                mostrarDatosProducto(result);
+            } else {
+                mostrarDatosProveedor(result);
+            }
         }
     })
     .catch(error => {
@@ -477,6 +495,8 @@ document.querySelector('.boton-enviarConsulta').addEventListener('click', functi
         alert('Hubo un problema con la solicitud.');
     });
 });
+
+//funciones para provedor
 
 function mostrarDatosProveedor(data) {
     const nombreIngresado = document.getElementById('inputProveedorNombre').value.trim();
@@ -572,6 +592,117 @@ function guardarCambios() {
     .catch(error => {
         console.error('Error:', error);
         alert('Hubo un problema al actualizar el proveedor.');
+    });
+}
+
+// funciones para producto
+function mostrarDatosProducto(data) {
+    const nombreIngresado = document.getElementById('inputProductoNombre').value.trim();
+
+    if (data.Nombre.trim().toLowerCase() !== nombreIngresado.toLowerCase()) {
+        alert('El nombre del producto no coincide exactamente con el buscado.');
+        return;
+    }
+
+    const contenedor = document.getElementById("contenedorCamposG");
+    contenedor.innerHTML = ""; // Limpiar contenido previo
+
+    // Crear un formulario para los campos editables
+    const form = document.createElement("form");
+    form.id = "productoForm";
+
+    // Campos ocultos para los IDs
+    const idProductoInput = document.createElement("input");
+    idProductoInput.type = "hidden";
+    idProductoInput.name = "Id_Producto";
+    idProductoInput.value = data.Id_Producto;
+    form.appendChild(idProductoInput);
+
+    const idProductoTallaInput = document.createElement("input");
+    idProductoTallaInput.type = "hidden";
+    idProductoTallaInput.name = "Id_Producto_Talla";
+    idProductoTallaInput.value = data.Id_Producto_Talla;
+    form.appendChild(idProductoTallaInput);
+
+    // Campos editables para Producto
+    const camposProducto = [
+        { name: "Nombre", label: "Nombre" },
+        { name: "Descripcion", label: "Descripción" },
+        { name: "Id_Categoria", label: "Categoría" },
+    ];
+
+    camposProducto.forEach(campo => {
+        const div = document.createElement("div");
+        const label = document.createElement("label");
+        label.textContent = campo.label + ": ";
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = campo.name;
+        input.value = data[campo.name];
+        input.style.margin = "5px 0";
+        div.appendChild(label);
+        div.appendChild(input);
+        form.appendChild(div);
+    });
+
+    // Campos editables para Producto_Talla
+    const camposTalla = [
+        { name: "Precio", label: "Precio" },
+        { name: "Stock", label: "Stock" },
+        { name: "Id_Talla", label: "Talla" },
+    ];
+
+    camposTalla.forEach(campo => {
+        const div = document.createElement("div");
+        const label = document.createElement("label");
+        label.textContent = campo.label + ": ";
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = campo.name;
+        input.value = data[campo.name];
+        input.style.margin = "5px 0";
+        div.appendChild(label);
+        div.appendChild(input);
+        form.appendChild(div);
+    });
+
+    // Botón de guardar
+    const botonGuardar = document.createElement("button");
+    botonGuardar.textContent = "Guardar Cambios";
+    botonGuardar.type = "button";
+    botonGuardar.addEventListener('click', guardarCambiosProducto);
+    form.appendChild(botonGuardar);
+
+    contenedor.appendChild(form);
+}
+function guardarCambiosProducto() {
+    const form = document.getElementById("productoForm");
+    const formData = new FormData(form);
+    const datos = Object.fromEntries(formData.entries());
+
+    if (!datos.Nombre || !datos.Id_Categoria || !datos.Precio || !datos.Stock || !datos.Id_Talla) {
+        alert('Todos los campos deben ser completados.');
+        return;
+    }
+
+    fetch('http://localhost:3000/actualizarProducto', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos),
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            alert('Producto actualizado exitosamente');
+        } else {
+            alert(result.error || 'Error al actualizar el producto');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un problema al actualizar el producto.');
     });
 }
 

@@ -28,7 +28,6 @@ form#form2 {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 400px;
     /* Ancho fijo */
 }
@@ -38,7 +37,6 @@ form.altas {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 legend {
@@ -91,7 +89,6 @@ input[type="file"] {
 .bajasmsg {
     margin-top: 20px;
     padding: 10px;
-    border-radius: 4px;
     font-weight: bold;
 }
 
@@ -127,7 +124,7 @@ input[type="file"] {
     flex-grow: 1;
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px 0 0 4px;
+
 }
 
 #btn-bajas,
@@ -135,7 +132,6 @@ input[type="file"] {
     background-color: #0056b3;
     color: #fff;
     border: none;
-    border-radius: 0 4px 4px 0;
     cursor: pointer;
     padding: 2px 7px; /* Ajustado para ser más pequeño */
     height: 43px; /* Altura */
@@ -159,7 +155,6 @@ form#form2 {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
 }
 
