@@ -20,7 +20,7 @@ function mostrarProd(p) {
     const html = `
         <div class="principal">
             <div class="imagen">
-                <img src="fotos/${p.Imagen_P}" alt="${p.Nombre_P}">
+                <img src="${p.Imagen_P}" alt="${p.Nombre_P}">
             </div>
             <div class="informacion">
                 <h1>${p.Nombre_P}</h1>
@@ -114,7 +114,7 @@ function mostrarProds(prods) {
                 <form action="producto.html" method="get">
                     <input type="hidden" name="id" value="${p.ID_Producto}">
                     <button type="submit" class="btn-imagen">
-                        <img src="fotos/${p.Imagen_P}" alt="${p.Nombre_P}">
+                        <img src="${p.Imagen_P}" alt="${p.Nombre_P}">
                     </button>
                 </form>
                 <h4>${p.Nombre_P}</h4>
