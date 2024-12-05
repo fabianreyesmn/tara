@@ -171,22 +171,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('nombreCategoria').value = '';
     });
 
-    // document.querySelector('.boton-enviarB').addEventListener('click', function(event) {
-    //     event.preventDefault(); // Prevenir el envío del formulario por defecto
-    
-    //     // // Obtener los valores de los campos
-    //     const nombreTabla = document.getElementById('nombreProductoB').value.trim();
-    //     const nombreElemento = document.getElementById('idBaja').value.trim();
-
-    //     // // Verificar que los valores no estén vacíos
-    //     if (!nombreTabla || !nombreElemento) {
-    //       alert('Por favor, seleccione una tabla y un nombre de elemento.');
-    //       return;
-    //     }
-    
-        // // Crear el objeto con los datos
-    //   });   
-
     document.querySelector('.boton-enviarB').addEventListener('click', function (event) {
         event.preventDefault(); // Prevenir el envío del formulario por defecto
     
@@ -261,8 +245,6 @@ document.addEventListener('DOMContentLoaded', function() {
           alert('Hubo un problema con la solicitud.');
         });
     });
-    
-
 });
 
 
