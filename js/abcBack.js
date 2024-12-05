@@ -245,6 +245,84 @@ document.addEventListener('DOMContentLoaded', function() {
           alert('Hubo un problema con la solicitud.');
         });
     });
+
+
+    // ----------------------------------
+
+    document.querySelector('form[id="formProducto"]').addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        // Obtener valores del formulario
+        let nombreProducto = document.getElementById('nombreProducto').value.trim();
+        let descripcion = document.getElementById('descripcion').value.trim();
+        let idCategoria = document.getElementById('idCategoria').value.trim();
+        let idProveedor = document.getElementById('idProveedor').value.trim();
+        let idTalla = document.getElementById('idTalla').value.trim();
+        let cantidad = document.getElementById('cantidad').value.trim();
+        let precio = document.getElementById('precio').value.trim();
+        let file = document.getElementById('imagenProducto').files[0];
+    
+        // Validar campos obligatorios
+        if (nombreProducto === '' || descripcion === '') {
+            alert("Por favor, complete todos los campos obligatorios.");
+            return;
+        }
+    
+        // Verificar que se haya seleccionado una imagen
+        if (!file) {
+            alert('Por favor, selecciona una imagen primero');
+            return;
+        }
+    
+
+ const formData = new FormData();
+formData.append('imagen', file);
+formData.append('nombreProducto', nombreProducto); 
+    
+        // Realizar la solicitud de subida
+        fetch('http://localhost:3000/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(imageData => {
+  
+            const productoData = {
+                nombreProducto,
+                descripcion,
+                idCategoria,
+                idProveedor,
+                idTalla,
+                cantidad,
+                precio,
+                imagen: imageData.filename 
+            };
+    
+            return fetch('http://localhost:3000/addProducto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productoData)
+            });
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                alert(data.mensaje);
+                // Limpiar formulario
+                document.getElementById('formProducto').reset();
+            }
+        })
+        .catch(error => {
+          console.error('Error al enviar la solicitud:', error);
+          alert('Hubo un problema con la solicitud.');
+        });
+    });
+
+    // ----------------------------------
 });
 
 
