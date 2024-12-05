@@ -40,7 +40,7 @@ function mostrarProd(p) {
                 <form id="agregar-car${p.ID_Producto}">
                     <input type="hidden" name="ID_Producto" value="${p.ID_Producto}">
                     ${isLoggedIn() ? `
-                        <button type="button" onclick="agregarAlCarrito(${p.ID_Producto})" class="agregar-p">
+                        <button type="button" onclick="addCarrito(${p.ID_Producto})" class="agregar-p">
                             <i class="fa-solid fa-cart-plus"></i>
                         </button>
                     ` : `
@@ -94,7 +94,7 @@ function mostrarProds(prods) {
         };
 
         const renderBotonCarrito = () => {
-            const idSesion = localStorage.getItem('idUsr');
+            const idSesion = localStorage.getItem('nombreUsuario');
             if (idSesion) {
                 return `
                     <button type="button" onclick="addCarrito(${p.ID_Producto})" class="agregar-p">
@@ -145,24 +145,25 @@ function getClaseExist(exist) {
 }
 
 function isLoggedIn() {
-    return localStorage.getItem('id') !== null;
+    return localStorage.getItem('nombreUsuario') !== null;
 }
 
-function agregarAlCarrito(idProd) {
-    const idUsr = localStorage.getItem('id');
-    if (!idUsr) {
+function addCarrito(idProd) {
+    const nombreUsuario = localStorage.getItem('nombreUsuario');
+    if (!nombreUsuario) {
+        alert('Inicie sesión para agregar al carrito');
         return;
     }
-    try {
-        window.api.addCarr(idUsr, idProd)
-            .then(response => {
-                alert('Producto agregado al carrito');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert(error.message);
-            });
-    } catch (err) {
-        console.error('Error:', err);
+    // Prompt or select the size before adding to cart
+    const idTalla = prompt('Ingrese la talla (ID de talla):');
+    if (!idTalla) {
+        alert('Debe seleccionar una talla');
+        return;
     }
+    window.api.addCarr(nombreUsuario, idProd, idTalla)
+        .then(() => alert('Agregado al carrito'))
+        .catch(err => {
+            console.error('Error:', err);
+            alert('Error al agregar al carrito');
+        });
 }
