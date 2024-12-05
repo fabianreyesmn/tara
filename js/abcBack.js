@@ -439,11 +439,19 @@ document.querySelector('.boton-enviarConsulta').addEventListener('click', functi
     let datos = {};
     if (nombreTabla === "Proveedor") {
         const nombreProveedor = document.getElementById('inputProveedorNombre')?.value.trim();
-        if (!nombreProveedor) {
-            alert('Por favor, ingrese el nombre del proveedor.');
+        const apellidoPaterno = document.getElementById('inputProveedorApellidoPaterno')?.value.trim();
+        const apellidoMaterno = document.getElementById('inputProveedorApellidoMaterno')?.value.trim();
+
+        if (!nombreProveedor || !apellidoPaterno || !apellidoMaterno) {
+            alert('Por favor, complete el nombre y ambos apellidos del proveedor.');
             return;
         }
-        datos = { nombre: nombreProveedor };
+
+        datos = {
+            nombre: nombreProveedor,
+            apellidoPaterno: apellidoPaterno,
+            apellidoMaterno: apellidoMaterno
+        };
     } else {
         alert('Actualmente solo se pueden consultar proveedores.');
         return;
@@ -471,6 +479,19 @@ document.querySelector('.boton-enviarConsulta').addEventListener('click', functi
 });
 
 function mostrarDatosProveedor(data) {
+    const nombreIngresado = document.getElementById('inputProveedorNombre').value.trim();
+    const apellidoPaternoIngresado = document.getElementById('inputProveedorApellidoPaterno').value.trim();
+    const apellidoMaternoIngresado = document.getElementById('inputProveedorApellidoMaterno').value.trim();
+
+    // Validar que los datos recibidos coincidan exactamente con lo ingresado
+    if (
+        data.Nombre.trim().toLowerCase() !== nombreIngresado.toLowerCase() ||
+        data.Apellido_Pat.trim().toLowerCase() !== apellidoPaternoIngresado.toLowerCase() ||
+        data.Apellido_Mat.trim().toLowerCase() !== apellidoMaternoIngresado.toLowerCase()
+    ) {
+        alert('Los datos no coinciden exactamente con el proveedor buscado.');
+        return;
+    }
     const contenedor = document.getElementById("contenedorCamposG");
     contenedor.innerHTML = ""; // Limpiar contenido previo
 
@@ -527,6 +548,12 @@ function guardarCambios() {
     const formData = new FormData(form);
     const datos = Object.fromEntries(formData.entries());
 
+    // Verifica si todos los campos obligatorios tienen valores
+    if (!datos.Nombre || !datos.Apellido_Pat || !datos.Apellido_Mat) {
+        alert('Todos los campos deben ser completados.');
+        return;
+    }
+
     fetch('http://localhost:3000/actualizarProveedor', {
         method: 'POST',
         headers: {
@@ -539,7 +566,7 @@ function guardarCambios() {
         if (result.success) {
             alert('Proveedor actualizado exitosamente');
         } else {
-            alert('Error al actualizar el proveedor');
+            alert(result.error || 'Error al actualizar el proveedor');
         }
     })
     .catch(error => {
@@ -547,6 +574,7 @@ function guardarCambios() {
         alert('Hubo un problema al actualizar el proveedor.');
     });
 }
+
 
 
 
