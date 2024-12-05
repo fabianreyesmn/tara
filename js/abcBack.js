@@ -171,80 +171,82 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('nombreCategoria').value = '';
     });
 
+    
+
     document.querySelector('.boton-enviarB').addEventListener('click', function (event) {
-        event.preventDefault(); // Prevenir el envío del formulario por defecto
+         event.preventDefault(); // Prevenir el envío del formulario por defecto
     
-        // Obtener la tabla seleccionada
-        const nombreTabla = document.getElementById('nombreProductoB').value.trim();
-        if (!nombreTabla) {
-            alert('Por favor, seleccione una tabla.');
-            return;
-        }
+         // Obtener la tabla seleccionada
+         const nombreTabla = document.getElementById('nombreProductoB').value.trim();
+         if (!nombreTabla) {
+             alert('Por favor, seleccione una tabla.');
+             return;
+         }
     
-        // Recoger dinámicamente los datos según la opción seleccionada
-        let datos = {};
-        if (nombreTabla === "Producto") {
-            const nombreProducto = document.getElementById('productoInput')?.value.trim();
-            if (!nombreProducto) {
-                alert('Por favor, ingrese el nombre del producto.');
-                return;
-            }
-            datos = { 
-                nombreTabla: "Producto", 
-                nombreElemento: nombreProducto, 
-                apellidoP: "-",
-                apellidoM: "-" };
-        } else if (nombreTabla === "Categoria") {
-            const nombreCategoria = document.getElementById('categoriaInput')?.value.trim();
-            if (!nombreCategoria) {
-                alert('Por favor, ingrese el nombre de la categoría.');
-                return;
-            }
-            datos = { 
-                nombreTabla: "Categoria", 
-                nombreElemento: nombreCategoria, 
-                apellidoP: "-",
-                apellidoM: "-" };
-        } else if (nombreTabla === "Proveedor") {
-            const nombreProveedor = document.getElementById('nombreProveedor')?.value.trim();
-            const apellidoPaterno = document.getElementById('apellidoPaterno')?.value.trim();
-            const apellidoMaterno = document.getElementById('apellidoMaterno')?.value.trim();
-            if (!nombreProveedor || !apellidoPaterno || !apellidoMaterno) {
-                alert('Por favor, complete todos los datos del proveedor (nombre y apellidos).');
-                return;
-            }
-            datos = {
-                nombreTabla: "Proveedor",
-                nombreElemento: nombreProveedor,
-                apellidoP: apellidoPaterno,
-                apellidoM: apellidoMaterno
-            };
-        }
+         // Recoger dinámicamente los datos según la opción seleccionada
+         let datos = {};
+         if (nombreTabla === "Producto") {
+             const nombreProducto = document.getElementById('productoInput')?.value.trim();
+             if (!nombreProducto) {
+                 alert('Por favor, ingrese el nombre del producto.');
+                 return;
+             }
+             datos = { 
+                 nombreTabla: "Producto", 
+                 nombreElemento: nombreProducto, 
+                 apellidoP: "-",
+                 apellidoM: "-" };
+         } else if (nombreTabla === "Categoria") {
+             const nombreCategoria = document.getElementById('categoriaInput')?.value.trim();
+             if (!nombreCategoria) {
+                 alert('Por favor, ingrese el nombre de la categoría.');
+                 return;
+             }
+             datos = { 
+                 nombreTabla: "Categoria", 
+                 nombreElemento: nombreCategoria, 
+                 apellidoP: "-",
+                 apellidoM: "-" };
+         } else if (nombreTabla === "Proveedor") {
+             const nombreProveedor = document.getElementById('nombreProveedor')?.value.trim();
+             const apellidoPaterno = document.getElementById('apellidoPaterno')?.value.trim();
+             const apellidoMaterno = document.getElementById('apellidoMaterno')?.value.trim();
+             if (!nombreProveedor || !apellidoPaterno || !apellidoMaterno) {
+                 alert('Por favor, complete todos los datos del proveedor (nombre y apellidos).');
+                 return;
+             }
+             datos = {
+                 nombreTabla: "Proveedor",
+                 nombreElemento: nombreProveedor,
+                 apellidoP: apellidoPaterno,
+                 apellidoM: apellidoMaterno
+             };
+         }
     
-        // Imprimir los datos en la consola
-        console.log("Datos ingresados:", datos);
+         // Imprimir los datos en la consola
+         console.log("Datos ingresados:", datos);
     
-        // // Enviar los datos al servidor con fetch
-        fetch('http://localhost:3000/bajaLogica', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(datos)
-        })
-        .then(response => response.json())
-        .then(result => {
-          if (result.mensaje) {
-            alert(result.mensaje);
-          } else if (result.error) {
-            alert(result.error);
-          }
-        })
-        .catch(error => {
-          console.error('Error al enviar la solicitud:', error);
-          alert('Hubo un problema con la solicitud.');
-        });
-    });
+         // // Enviar los datos al servidor con fetch
+         fetch('http://localhost:3000/bajaLogica', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify(datos)
+         })
+         .then(response => response.json())
+         .then(result => {
+           if (result.mensaje) {
+             alert(result.mensaje);
+           } else if (result.error) {
+             alert(result.error);
+           }
+         })
+         .catch(error => {
+           console.error('Error al enviar la solicitud:', error);
+           alert('Hubo un problema con la solicitud.');
+         });
+     });
 
 
     // ----------------------------------
@@ -324,8 +326,6 @@ formData.append('nombreProducto', nombreProducto);
 
     // ----------------------------------
 });
-
-
 function mostrarCampos() {
     const contenedor = document.getElementById("contenedorCampos");
     const seleccion = document.getElementById("nombreProductoB").value;
@@ -381,4 +381,334 @@ function mostrarCampos() {
       contenedor.appendChild(inputApellidoMaterno);
     }
 }
+
+function mostrarCamposG() {
+    const contenedor = document.getElementById("contenedorCamposG");
+    const seleccion = document.getElementById("selectNombreProducto").value;
+    contenedor.innerHTML = "";
+
+    if (seleccion === "Producto") {
+        const inputProducto = document.createElement("input");
+        inputProducto.type = "text";
+        inputProducto.id = "inputProductoNombre";
+        inputProducto.name = "productoNombre";
+        inputProducto.placeholder = "Nombre del Producto";
+        inputProducto.style.margin = "4px 0";
+        inputProducto.required = true;
+        contenedor.appendChild(inputProducto);
+    } else if (seleccion === "Proveedor") {
+        const inputNombre = document.createElement("input");
+        inputNombre.type = "text";
+        inputNombre.id = "inputProveedorNombre";
+        inputNombre.name = "proveedorNombre";
+        inputNombre.placeholder = "Nombre del Proveedor";
+        inputNombre.style.margin = "5px 0";
+        inputNombre.required = true;
+
+        const inputApellidoPaterno = document.createElement("input");
+        inputApellidoPaterno.type = "text";
+        inputApellidoPaterno.id = "inputProveedorApellidoPaterno";
+        inputApellidoPaterno.name = "proveedorApellidoPaterno";
+        inputApellidoPaterno.placeholder = "Apellido Paterno";
+        inputApellidoPaterno.style.margin = "5px 0";
+        inputApellidoPaterno.required = true;
+
+        const inputApellidoMaterno = document.createElement("input");
+        inputApellidoMaterno.type = "text";
+        inputApellidoMaterno.id = "inputProveedorApellidoMaterno";
+        inputApellidoMaterno.name = "proveedorApellidoMaterno";
+        inputApellidoMaterno.placeholder = "Apellido Materno";
+        inputApellidoMaterno.style.margin = "5px 0";
+        inputApellidoMaterno.required = true;
+
+        contenedor.appendChild(inputNombre);
+        contenedor.appendChild(inputApellidoPaterno);
+        contenedor.appendChild(inputApellidoMaterno);
+    }
+}
+
+//funcion para select
+
+document.querySelector('.boton-enviarConsulta').addEventListener('click', function (event) {
+    event.preventDefault();
+
+    const nombreTabla = document.getElementById('selectNombreProducto').value.trim();
+    if (!nombreTabla) {
+        alert('Por favor, seleccione una tabla.');
+        return;
+    }
+
+    let datos = {};
+    let endpoint = '';
+    if (nombreTabla === "Producto") {
+        const nombreProducto = document.getElementById('inputProductoNombre')?.value.trim();
+    
+        if (!nombreProducto) {
+            alert('Por favor, ingrese el nombre del producto.');
+            return;
+        }
+    
+        datos = { nombre: nombreProducto };
+        endpoint = 'http://localhost:3000/obtenerProducto'; // Change endpoint for Producto
+    } else if (nombreTabla === "Proveedor") {
+        const nombreProveedor = document.getElementById('inputProveedorNombre')?.value.trim();
+        const apellidoPaterno = document.getElementById('inputProveedorApellidoPaterno')?.value.trim();
+        const apellidoMaterno = document.getElementById('inputProveedorApellidoMaterno')?.value.trim();
+
+        if (!nombreProveedor || !apellidoPaterno || !apellidoMaterno) {
+            alert('Por favor, complete el nombre y ambos apellidos del proveedor.');
+            return;
+        }
+
+        datos = {
+            nombre: nombreProveedor,
+            apellidoPaterno: apellidoPaterno,
+            apellidoMaterno: apellidoMaterno
+        };
+        endpoint = 'http://localhost:3000/obtenerProveedor'; // Keep existing endpoint for Proveedor
+    } else {
+        alert('Actualmente solo se pueden consultar proveedores.');
+        return;
+    }
+
+    fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos),
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.error) {
+            alert(result.error);
+        } else {
+            if (nombreTabla === "Producto") {
+                mostrarDatosProducto(result);
+            } else {
+                mostrarDatosProveedor(result);
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error al enviar la solicitud:', error);
+        alert('Hubo un problema con la solicitud.');
+    });
+});
+
+//funciones para provedor
+
+function mostrarDatosProveedor(data) {
+    const nombreIngresado = document.getElementById('inputProveedorNombre').value.trim();
+    const apellidoPaternoIngresado = document.getElementById('inputProveedorApellidoPaterno').value.trim();
+    const apellidoMaternoIngresado = document.getElementById('inputProveedorApellidoMaterno').value.trim();
+
+    // Validar que los datos recibidos coincidan exactamente con lo ingresado
+    if (
+        data.Nombre.trim().toLowerCase() !== nombreIngresado.toLowerCase() ||
+        data.Apellido_Pat.trim().toLowerCase() !== apellidoPaternoIngresado.toLowerCase() ||
+        data.Apellido_Mat.trim().toLowerCase() !== apellidoMaternoIngresado.toLowerCase()
+    ) {
+        alert('Los datos no coinciden exactamente con el proveedor buscado.');
+        return;
+    }
+    const contenedor = document.getElementById("contenedorCamposG");
+    contenedor.innerHTML = ""; // Limpiar contenido previo
+
+    // Crear un formulario para los campos editables
+    const form = document.createElement("form");
+    form.id = "proveedorForm";
+
+    // Campos ocultos para el ID
+    const idInput = document.createElement("input");
+    idInput.type = "hidden";
+    idInput.name = "Id_Proveedor";
+    idInput.value = data.Id_Proveedor;
+    form.appendChild(idInput);
+
+    // Campos editables
+    const campos = [
+        { name: "Nombre", label: "Nombre" },
+        { name: "Apellido_Pat", label: "Apellido Paterno" },
+        { name: "Apellido_Mat", label: "Apellido Materno" },
+        { name: "Direccion", label: "Dirección" },
+        { name: "Telefono", label: "Teléfono" },
+        { name: "Correo", label: "Correo" }
+    ];
+
+    campos.forEach(campo => {
+        const div = document.createElement("div");
+        
+        const label = document.createElement("label");
+        label.textContent = campo.label + ": ";
+        
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = campo.name;
+        input.value = data[campo.name];
+        input.style.margin = "5px 0";
+        
+        div.appendChild(label);
+        div.appendChild(input);
+        form.appendChild(div);
+    });
+
+    // Botón de guardar
+    const botonGuardar = document.createElement("button");
+    botonGuardar.textContent = "Guardar Cambios";
+    botonGuardar.type = "button";
+    botonGuardar.addEventListener('click', guardarCambios);
+    form.appendChild(botonGuardar);
+
+    contenedor.appendChild(form);
+}
+
+function guardarCambios() {
+    const form = document.getElementById("proveedorForm");
+    const formData = new FormData(form);
+    const datos = Object.fromEntries(formData.entries());
+
+    // Verifica si todos los campos obligatorios tienen valores
+    if (!datos.Nombre || !datos.Apellido_Pat || !datos.Apellido_Mat) {
+        alert('Todos los campos deben ser completados.');
+        return;
+    }
+
+    fetch('http://localhost:3000/actualizarProveedor', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos),
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            alert('Proveedor actualizado exitosamente');
+        } else {
+            alert(result.error || 'Error al actualizar el proveedor');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un problema al actualizar el proveedor.');
+    });
+}
+
+// funciones para producto
+function mostrarDatosProducto(data) {
+    const nombreIngresado = document.getElementById('inputProductoNombre').value.trim();
+
+    if (data.Nombre.trim().toLowerCase() !== nombreIngresado.toLowerCase()) {
+        alert('El nombre del producto no coincide exactamente con el buscado.');
+        return;
+    }
+
+    const contenedor = document.getElementById("contenedorCamposG");
+    contenedor.innerHTML = ""; // Limpiar contenido previo
+
+    // Crear un formulario para los campos editables
+    const form = document.createElement("form");
+    form.id = "productoForm";
+
+    // Campos ocultos para los IDs
+    const idProductoInput = document.createElement("input");
+    idProductoInput.type = "hidden";
+    idProductoInput.name = "Id_Producto";
+    idProductoInput.value = data.Id_Producto;
+    form.appendChild(idProductoInput);
+
+    const idProductoTallaInput = document.createElement("input");
+    idProductoTallaInput.type = "hidden";
+    idProductoTallaInput.name = "Id_Producto_Talla";
+    idProductoTallaInput.value = data.Id_Producto_Talla;
+    form.appendChild(idProductoTallaInput);
+
+    // Campos editables para Producto
+    const camposProducto = [
+        { name: "Nombre", label: "Nombre" },
+        { name: "Descripcion", label: "Descripción" },
+        { name: "Id_Categoria", label: "Categoría" },
+    ];
+
+    camposProducto.forEach(campo => {
+        const div = document.createElement("div");
+        const label = document.createElement("label");
+        label.textContent = campo.label + ": ";
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = campo.name;
+        input.value = data[campo.name];
+        input.style.margin = "5px 0";
+        div.appendChild(label);
+        div.appendChild(input);
+        form.appendChild(div);
+    });
+
+    // Campos editables para Producto_Talla
+    const camposTalla = [
+        { name: "Precio", label: "Precio" },
+        { name: "Stock", label: "Stock" },
+        { name: "Id_Talla", label: "Talla" },
+    ];
+
+    camposTalla.forEach(campo => {
+        const div = document.createElement("div");
+        const label = document.createElement("label");
+        label.textContent = campo.label + ": ";
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = campo.name;
+        input.value = data[campo.name];
+        input.style.margin = "5px 0";
+        div.appendChild(label);
+        div.appendChild(input);
+        form.appendChild(div);
+    });
+
+    // Botón de guardar
+    const botonGuardar = document.createElement("button");
+    botonGuardar.textContent = "Guardar Cambios";
+    botonGuardar.type = "button";
+    botonGuardar.addEventListener('click', guardarCambiosProducto);
+    form.appendChild(botonGuardar);
+
+    contenedor.appendChild(form);
+}
+function guardarCambiosProducto() {
+    const form = document.getElementById("productoForm");
+    const formData = new FormData(form);
+    const datos = Object.fromEntries(formData.entries());
+
+    if (!datos.Nombre || !datos.Id_Categoria || !datos.Precio || !datos.Stock || !datos.Id_Talla) {
+        alert('Todos los campos deben ser completados.');
+        return;
+    }
+
+    fetch('http://localhost:3000/actualizarProducto', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos),
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            alert('Producto actualizado exitosamente');
+        } else {
+            alert(result.error || 'Error al actualizar el producto');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un problema al actualizar el producto.');
+    });
+}
+
+
+
+
+
+
 

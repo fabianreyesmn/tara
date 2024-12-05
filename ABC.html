@@ -141,17 +141,17 @@
                 <div class="cam">
                     <h2>Cambios</h2>
                     <div class="campoD">
-                      <select id="nombreProducto" name="nombreProducto" required>
-                          <option value="" disabled selected>Seleccione una opccion  </option>
-                          <option value="Producto">Producto</option>
-                          <option value="Proveedor">Proveedor</option>
-                          <option value="Categoria">Categoria</option>
-                      </select> 
+                        <select id="selectNombreProducto" name="tipoSeleccion" required onchange="mostrarCamposG()">
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="Producto">Producto</option>
+                            <option value="Proveedor">Proveedor</option>
+                        </select> 
                   </div>
-                    <div class="campo">
-                        <input type="text" id="idCambio" name="idCambio" placeholder="Id" required>
-                    </div>
-                    <button type="submit" class="boton-enviar">Buscar</button>
+                  
+                  <div class="campo" id="contenedorCamposG">
+                    
+                  </div>
+                    <button type="submit" class="boton-enviarConsulta boton-enviar">Buscar</button>
                 </div>
       
       

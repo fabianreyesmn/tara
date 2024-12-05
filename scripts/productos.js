@@ -55,7 +55,7 @@ function mostrarProds(prods) {
         };
 
         const renderBotonCarrito = () => {
-            const idSesion = localStorage.getItem('idUsr');
+            const idSesion = localStorage.getItem('nombreUsuario');
             if (idSesion) {
                 return `
                     <button type="button" onclick="addCarrito(${p.ID_Producto})" class="agregar-p">
@@ -75,7 +75,7 @@ function mostrarProds(prods) {
                 <form action="producto.html" method="get">
                     <input type="hidden" name="id" value="${p.ID_Producto}">
                     <button type="submit" class="btn-imagen">
-                        <img src="fotos/${p.Imagen_P}" alt="${p.Nombre_P}">
+                        <img src="${p.Imagen_P}" alt="${p.Nombre_P}">
                     </button>
                 </form>
                 <h4>${p.Nombre_P}</h4>
@@ -106,13 +106,18 @@ function getClaseExist(exist) {
 }
 
 function addCarrito(idProd) {
-    const idUsr = localStorage.getItem('idUsr');
-    if (!idUsr) {
+    const nombreUsuario = localStorage.getItem('nombreUsuario');
+    if (!nombreUsuario) {
         alert('Inicie sesión para agregar al carrito');
         return;
     }
-
-    window.api.addCarr(idUsr, idProd)
+    // Prompt or select the size before adding to cart
+    const idTalla = prompt('Ingrese la talla (ID de talla):');
+    if (!idTalla) {
+        alert('Debe seleccionar una talla');
+        return;
+    }
+    window.api.addCarr(nombreUsuario, idProd, idTalla)
         .then(() => alert('Agregado al carrito'))
         .catch(err => {
             console.error('Error:', err);
