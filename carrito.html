@@ -39,7 +39,38 @@
         
                 </form>
             </div>
+
+            <div id="formularioEnvio" class="formulariosLoginRegistro">
+                <h2 class="titulo">Información de Envío</h2>
+                <form id="formEnvio">
+                    <label for="calle">Calle</label>
+                    <input type="text" id="calle" name="calle" required placeholder="Calle" />
+                    <label for="numero">Número</label>
+                    <input 
+                        type="number" 
+                        id="numero" 
+                        name="numero" 
+                        required 
+                        placeholder="Número" 
+                        
+                    />
+                    
+                    <label for="colonia">Colonia</label>
+                    <input type="text" id="colonia" name="colonia" required placeholder="Colonia" />
+            
+                    <label for="empresaTransporte">Empresa de Transporte</label>
+                    <select id="empresaTransporte" name="empresaTransporte" required>
+                        <option value="DHL">DHL</option>
+                        <option value="FEDEX">FEDEX</option>
+                        <option value="UPS">UPS</option>
+                    </select>
+            
+                    <button type="button" id="btnGuardarEnvio">Guardar Envío</button>
+                </form>
+            </div>
         </div>
+        
+       
         
     
         <script src="js/prod_carrito.js"></script>

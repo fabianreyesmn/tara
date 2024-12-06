@@ -121,3 +121,92 @@ h2{
 }
 
 
+/* Estilo general para el formulario */
+#formularioEnvio {
+  background-color: #000000;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+  width: 500px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Estilo para los títulos dentro del formulario */
+#formularioEnvio h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fdfcfb;
+}
+
+/* Estilo para los labels del formulario */
+#formularioEnvio label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: block;
+  text-align: left;
+  color: #fffefd;
+
+}
+
+/* Estilo para los campos de texto (inputs) */
+#formularioEnvio input, 
+#formularioEnvio select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+}
+
+/* Efecto al enfocarse en los inputs */
+#formularioEnvio input:focus, 
+#formularioEnvio select:focus {
+  border: 1px solid #C19A6B;
+  background-color: #444;
+  outline: none;
+}
+
+/* Estilo para el botón de guardar */
+#btnGuardarEnvio {
+  padding: 12px 20px;
+  background-color: #fcfbfa;
+  border: none;
+  border-radius: 5px;
+  color: rgb(58, 58, 58);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+/* Efecto hover en el botón */
+#btnGuardarEnvio:hover {
+  background-color: #d3d1d0;
+}
+
+
+
+#formularioEnvio form {
+  width: 100%;
+}
+
+/* Estilo para las opciones de transporte */
+#formularioEnvio select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+}
+
+
+

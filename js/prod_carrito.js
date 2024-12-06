@@ -96,5 +96,76 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Error al eliminar el producto");
         }
     };
+
+
+    // Lógica para manejar el envío de datos del formulario
+    const btnGuardarEnvio = document.getElementById("btnGuardarEnvio");
+
+    if (btnGuardarEnvio) {
+        btnGuardarEnvio.addEventListener("click", async () => {
+            try {
+                // Obtener los valores del formulario
+                const calle = document.getElementById("calle").value.trim();
+                const numero = document.getElementById("numero").value.trim();
+                const colonia = document.getElementById("colonia").value.trim();
+                const empresaTransporte = document.getElementById("empresaTransporte").value.trim();
+
+                // Validación
+                if (!calle || !numero ||!colonia || !empresaTransporte) {
+                    alert("Por favor, completa todos los campos.");
+                    return;
+
+                }
+               
+
+                // Preparar los datos
+                const direccionCompleta = `${calle} ${numero}, ${colonia}`;
+                const fechaEnvio = new Date().toISOString().split("T")[0];
+                const fechaEntrega = new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
+                const numeroSeguimiento = `NS-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+
+                const envioData = {
+                    direccion: direccionCompleta,
+                    fechaEnvio: fechaEnvio,
+                    fechaEntrega: fechaEntrega,
+                    costoEnvio: 180.00,
+                    empresaTransporte: empresaTransporte,
+                    numeroSeguimiento: numeroSeguimiento,
+                };
+
+                // Realizar la petición
+                const response = await fetch("http://localhost:3000/envios", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(envioData),
+                });
+
+                // Verificar si la respuesta es exitosa
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert("Envío guardado exitosamente.");
+                    // Opcional: limpiar el formulario
+                    document.getElementById("formEnvio").reset();
+                } else {
+                    alert("Error al guardar el envío: " + (result.error || "Error desconocido"));
+                }
+
+            } catch (error) {
+                console.error("Error en la solicitud:", error);
+                alert("Error al guardar el envío. Por favor, intenta de nuevo.");
+            }
+        });
+    }
+
+
+
 });
 
