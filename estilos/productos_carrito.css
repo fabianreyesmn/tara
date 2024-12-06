@@ -1,0 +1,75 @@
+/* Estilo para el contenedor de productos en el carrito */
+#carritoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+h2{
+  text-align: center;
+}
+.producto-carrito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.producto-info {
+  flex-grow: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.producto-carrito p {
+  margin: 5px 0;
+}
+
+.btn-eliminar {
+  background-color: #f44336;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-eliminar i {
+  margin-right: 5px;
+}
+
+.btn-eliminar:hover {
+  background-color: #d32f2f;
+}
+
+#totalContainer {
+  margin-top: 30px;
+  text-align: center;
+}
+
+
+#btnPagar {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #000000;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#btnPagar:hover {
+  background-color: #4e5052;
+}
