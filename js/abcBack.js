@@ -705,6 +705,296 @@ function guardarCambiosProducto() {
         alert('Hubo un problema al actualizar el producto.');
     });
 }
+//imprimit tabla proveedores
+document.querySelector('.bot-send').addEventListener('click', function (event) {
+    event.preventDefault();
+
+    fetch('http://localhost:3000/obtenerProveedoresActivos', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            mostrarTablaProveedores(data);
+        })
+        .catch(error => {
+            console.error('Error al obtener proveedores activos:', error);
+            alert('Hubo un problema al obtener los proveedores activos.');
+        });
+});
+
+function mostrarTablaProveedores(proveedores) {
+    const contenedor = document.getElementById('tablaProveedores');
+    contenedor.innerHTML = ''; // Limpia cualquier contenido previo
+
+    const titulo = document.createElement('h2');
+    titulo.textContent = 'Proveedores';
+    titulo.style.marginBottom = '15px';
+    contenedor.appendChild(titulo);
+
+    if (proveedores.length === 0) {
+        contenedor.textContent = 'No hay proveedores activos.';
+        return;
+    }
+
+    // Crear la tabla
+    const table = document.createElement('table');
+    table.border = '1';
+    table.style.borderCollapse = 'collapse';
+
+    // Encabezados
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    ['ID', 'Nombre Completo'].forEach(headerText => {
+        const th = document.createElement('th');
+        th.textContent = headerText;
+        th.style.padding = '8px';
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    // Cuerpo de la tabla
+    const tbody = document.createElement('tbody');
+    proveedores.forEach(proveedor => {
+        const row = document.createElement('tr');
+        const idCell = document.createElement('td');
+        idCell.textContent = proveedor.Id_Proveedor;
+        idCell.style.padding = '8px';
+        const nameCell = document.createElement('td');
+        nameCell.textContent = proveedor.NombreCompleto;
+        nameCell.style.padding = '8px';
+        row.appendChild(idCell);
+        row.appendChild(nameCell);
+        tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+
+    // Agregar la tabla al contenedor
+    contenedor.appendChild(table);
+}
+
+// Evento para el botón de Categoría
+document.querySelector('.bot-send2').addEventListener('click', function (event) {
+    event.preventDefault();
+    fetch('http://localhost:3000/obtenerCategorias', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+        mostrarTablaCategorias(data);
+    })
+    .catch(error => {
+        console.error('Error al obtener categorías:', error);
+        alert('Hubo un problema al obtener las categorías.');
+    });
+});
+
+// Evento para el botón de Talla
+document.querySelector('.bot-send3').addEventListener('click', function (event) {
+    event.preventDefault();
+    fetch('http://localhost:3000/obtenerTallas', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+        mostrarTablaTallas(data);
+    })
+    .catch(error => {
+        console.error('Error al obtener tallas:', error);
+        alert('Hubo un problema al obtener las tallas.');
+    });
+});
+
+// Evento para el botón de Nacionalidad
+document.querySelector('.bot-send4').addEventListener('click', function (event) {
+    event.preventDefault();
+    fetch('http://localhost:3000/obtenerNacionalidades', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+        mostrarTablaNacionalidades(data);
+    })
+    .catch(error => {
+        console.error('Error al obtener nacionalidades:', error);
+        alert('Hubo un problema al obtener las nacionalidades.');
+    });
+});
+
+// Función para mostrar tabla de Categorías
+function mostrarTablaCategorias(categorias) {
+    const contenedor = document.getElementById('tablaProveedores');
+    contenedor.innerHTML = ''; 
+
+    const titulo = document.createElement('h2');
+    titulo.textContent = 'Categorías';
+    titulo.style.marginBottom = '15px';
+    contenedor.appendChild(titulo);
+
+    if (categorias.length === 0) {
+        contenedor.textContent = 'No hay categorías disponibles.';
+        return;
+    }
+
+    const table = document.createElement('table');
+    table.border = '1';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    ['ID Categoría', 'Nombre'].forEach(headerText => {
+        const th = document.createElement('th');
+        th.textContent = headerText;
+        th.style.padding = '8px';
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    categorias.forEach(categoria => {
+        const row = document.createElement('tr');
+        const idCell = document.createElement('td');
+        idCell.textContent = categoria.Id_categoria;
+        idCell.style.padding = '8px';
+        const nameCell = document.createElement('td');
+        nameCell.textContent = categoria.Nombre;
+        nameCell.style.padding = '8px';
+        row.appendChild(idCell);
+        row.appendChild(nameCell);
+        tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+
+    contenedor.appendChild(table);
+}
+
+// Función para mostrar tabla de Tallas
+function mostrarTablaTallas(tallas) {
+    const contenedor = document.getElementById('tablaProveedores');
+    contenedor.innerHTML = ''; 
+    const titulo = document.createElement('h2');
+    titulo.textContent = 'Tallas';
+    titulo.style.marginBottom = '15px';
+    contenedor.appendChild(titulo);
+
+    if (tallas.length === 0) {
+        contenedor.textContent = 'No hay tallas disponibles.';
+        return;
+    }
+
+    const table = document.createElement('table');
+    table.border = '1';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    ['ID Talla', 'Nombre', 'Descripción'].forEach(headerText => {
+        const th = document.createElement('th');
+        th.textContent = headerText;
+        th.style.padding = '8px';
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    tallas.forEach(talla => {
+        const row = document.createElement('tr');
+        const idCell = document.createElement('td');
+        idCell.textContent = talla.Id_Talla;
+        idCell.style.padding = '8px';
+        const nameCell = document.createElement('td');
+        nameCell.textContent = talla.Nombre;
+        nameCell.style.padding = '8px';
+        const descCell = document.createElement('td');
+        descCell.textContent = talla.Descripcion;
+        descCell.style.padding = '8px';
+        row.appendChild(idCell);
+        row.appendChild(nameCell);
+        row.appendChild(descCell);
+        tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+
+    contenedor.appendChild(table);
+}
+
+// Función para mostrar tabla de Nacionalidades
+function mostrarTablaNacionalidades(nacionalidades) {
+    const contenedor = document.getElementById('tablaProveedores');
+    contenedor.innerHTML = ''; 
+    const titulo = document.createElement('h2');
+    titulo.textContent = 'Nacionalidades';
+    titulo.style.marginBottom = '15px';
+    contenedor.appendChild(titulo);
+
+    if (nacionalidades.length === 0) {
+        contenedor.textContent = 'No hay nacionalidades disponibles.';
+        return;
+    }
+
+    const table = document.createElement('table');
+    table.border = '1';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    ['ID Nacionalidad', 'Nacionalidad'].forEach(headerText => {
+        const th = document.createElement('th');
+        th.textContent = headerText;
+        th.style.padding = '8px';
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    nacionalidades.forEach(nacionalidad => {
+        const row = document.createElement('tr');
+        const idCell = document.createElement('td');
+        idCell.textContent = nacionalidad.Id_Nacionalidad;
+        idCell.style.padding = '8px';
+        const nameCell = document.createElement('td');
+        nameCell.textContent = nacionalidad.Nacionalidad;
+        nameCell.style.padding = '8px';
+        row.appendChild(idCell);
+        row.appendChild(nameCell);
+        tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+
+    contenedor.appendChild(table);
+}
+
 
 
 

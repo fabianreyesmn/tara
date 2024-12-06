@@ -200,3 +200,56 @@ select:focus {
 .campoD {
   margin-bottom: 10px; 
 }
+  .consultitas {
+    display: flex; 
+    justify-content: center;
+    gap: 30px; 
+    margin: 20px 0; 
+  }
+
+  .cot {
+    padding: 10px 20px; 
+    background-color: #4c4c4c;
+    color: white; 
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+    font-size: 16px; 
+  }
+
+  .cot:hover {
+    background-color:#3f3c3c;
+  }
+  #tablaProveedores {
+    margin: 0 auto;
+}
+ 
+  #tablaProveedores {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+     max-width: 30% ;
+}
+
+#tablaProveedores table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+#tablaProveedores th, 
+#tablaProveedores td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+#tablaProveedores th {
+    background-color: #f4f4f4;
+}
