@@ -31,12 +31,17 @@ function mostrarSeccion(seccionId) {
         break;
         case 9: mostrarInactivos()
         break;
+        case 10: mostrarIngresos()
+        break;
+        case 11: mostrarProductosConPrecioBajo()
+        break;
+        case 12: mostrarPrecioPromedioPorCategoria()
+        break;
         default: cargarProductos(1)
         break;
     }
 }
 
-// Función para obtener y cargar los productos en la tabla
 async function cargarProductos(opc) {
     let response
     try {
@@ -206,6 +211,19 @@ async function cargarPrecioCategoria(opc) {
     }
 }
 
+async function mostrarIngresos(){
+    try{
+        const respuesta = await fetch('http://localhost:3000/obtenerIngresosPorCategoria'); // Asegúrate que la URL sea la correcta
+        const datos = await respuesta.json();
+        const ingreso = document.getElementById('ingreso');
+        ingreso.textContent = '';
+        ingreso.textContent = `Ingreso en la categoria Ropa Deportiva: $${datos.Total_Ingresos}`;
+    }catch (error) {
+        console.error('Error al obtener inactivos:', error);
+
+    }
+}
+
 async function mostrarInactivos() {
     try {
         const respuesta = await fetch('http://localhost:3000/obtenerInactivos');
@@ -256,6 +274,106 @@ async function mostrarInactivos() {
         divInactivos.innerHTML = `
             <div class="alert alert-danger" role="alert">
                 Error al cargar los registros inactivos.
+            </div>
+        `;
+    }
+}
+
+async function mostrarProductosConPrecioBajo() {
+    try {
+        const respuesta = await fetch('http://localhost:3000/obtenerProductosConPrecioBajo');
+        const datos = await respuesta.json();
+        if (datos.ProductosConPrecioBajo) {
+            const ingreso = document.getElementById('precioBajo');
+            ingreso.innerHTML = '';
+            const productosString = datos.ProductosConPrecioBajo;
+            const productos = productosString.split(', ');
+            const lista = document.createElement('ul');
+            productos.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = item; 
+                lista.appendChild(li);
+            });
+        
+            ingreso.appendChild(lista);
+
+        } else {
+            const ingreso = document.getElementById('precioBajo');
+            ingreso.innerHTML = `
+                <div class="alert alert-warning" role="alert">
+                    No se encontraron productos con precio bajo después de la fecha especificada.
+                </div>
+            `;
+        }
+
+    } catch (error) {
+        console.error('Error al obtener los productos con precio bajo:', error);
+        const ingreso = document.getElementById('precioBajo');
+        ingreso.innerHTML = `
+            <div class="alert alert-danger" role="alert">
+                Error al cargar los productos con precio bajo.
+            </div>
+        `;
+    }
+}
+
+async function mostrarPrecioPromedioPorCategoria() {
+    try {
+        const respuesta = await fetch('http://localhost:3000/obtenerPrecioPromedioPorCategoria');
+        const datos = await respuesta.json();
+
+        // Verificar si la respuesta es un array o un objeto con una propiedad de array
+        console.log(datos);  // Añadir para depuración
+
+        const ingreso = document.getElementById('precioPromedioPorCategoria');
+        ingreso.innerHTML = ''; // Limpiar contenido previo
+
+        // Si 'datos' es un array, no necesitas acceder a una propiedad específica
+        if (Array.isArray(datos)) {
+            // Crear tabla
+            const tabla = document.createElement('table');
+            tabla.classList.add('table', 'table-striped'); // Agregar clases para estilo
+
+            // Crear encabezado de tabla
+            const thead = document.createElement('thead');
+            thead.innerHTML = `
+                <tr>
+                    <th>Categoría</th>
+                    <th>Precio Promedio</th>
+                </tr>
+            `;
+            tabla.appendChild(thead);
+
+            // Crear cuerpo de tabla
+            const tbody = document.createElement('tbody');
+
+            // Iterar sobre los datos y agregar una fila por cada producto
+            datos.forEach(item => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${item.Categoria}</td>
+                    <td>${item.Precio_Promedio}</td>
+                `;
+                tbody.appendChild(fila);
+            });
+
+            tabla.appendChild(tbody);
+
+            // Añadir la tabla al contenedor
+            ingreso.appendChild(tabla);
+        } else {
+            ingreso.innerHTML = `<div class="alert alert-danger" role="alert">
+                Los datos no están en el formato esperado.
+            </div>`;
+        }
+
+    } catch (error) {
+        console.error('Error al obtener el precio promedio por categoría:', error);
+
+        const ingreso = document.getElementById('precioPromedioPorCategoria');
+        ingreso.innerHTML = `
+            <div class="alert alert-danger" role="alert">
+                Error al cargar los precios promedio por categoría.
             </div>
         `;
     }

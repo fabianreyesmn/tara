@@ -13,22 +13,30 @@ h1 {
 }
 .buttons-container {
     margin-bottom: 20px;
+    display: flex;           
+    flex-wrap: wrap; 
+    justify-content: center;            
+    gap: 10px;                   
+    max-width: 80%;
 }
+
 .buttons-container button {
-    margin: 5px;
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: 12px;
     cursor: pointer;
     border: none;
     background-color: #4C4C4C;
     color: white;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    /* max-width: 150px; */
+    max-width: 200px;            
+    width: auto;               
 }
+
 .buttons-container button:hover {
     background-color: #676666;
 }
+
 .flex {
     display: none; /* Ocultamos inicialmente */
     flex-direction: column;
@@ -57,4 +65,7 @@ th {
     min-width: 500px;              /* Ajusta el contenedor al 80% del ancho */
     height: 400px;           /* Puedes cambiar la altura a lo que necesites */
     margin: 0 auto;          /* Centra el contenedor en la página */
+}
+li, ul{
+    margin: 6px;
 }

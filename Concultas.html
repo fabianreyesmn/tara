@@ -24,7 +24,9 @@
         <button onclick="mostrarSeccion(7)">Stock &gt; 100 por Categoria</button>
         <button onclick="mostrarSeccion(8)">Stock &lt; 100 por Categoria</button>
         <button onclick="mostrarSeccion(9)">Elementos inactivos</button>
-        <button onclick="mostrarSeccion(10)">Elementos activos</button>
+        <button onclick="mostrarSeccion(10)">Ingresos "Ropa Deportiva"</button>
+        <button onclick="mostrarSeccion(11)">Productos precio Bajo</button>
+        <button onclick="mostrarSeccion(12)">Precio productos vendidos</button>
     </div>
     <!-- VISTA TODOS LOS PRODUCTOS -->
     <div id="seccion-1" class="flex">
@@ -161,6 +163,21 @@
 
       </div>
     </div>
+    <!-- Ingreso categoria Ropa Deportiva -->
+    <div id="seccion-10" class="flex">
+      <h2 style="margin: 10px;">Ingreso en la categoria Ropa Deportiva > Promedio</h2>
+      <p id="ingreso"></p>
+    </div>
+    <!-- Mostrar los productos con precio bajo -->
+    <div id="seccion-11" class="flex">
+      <h2 style="margin: 10px;">Productos con ingreso bajo despues del 2024-01-01</h2>
+      <p id="precioBajo"></p>
+    </div>
+    <!-- Precio productos vendidos -->
+     <div id="seccion-12" class="flex">
+      <h2 style="margin: 10px;">Precios de productos vendidos después de una fecha específica</h2>
+      <div id="precioPromedioPorCategoria"></div>
+     </div>
   </div>
   <div id="footer-container"></div>
   <script src="js/consultas.js"></script>
