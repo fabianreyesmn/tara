@@ -6,7 +6,25 @@
     <link rel="stylesheet" href="estilos/productos_carrito.css">
     <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    
+    .botonticket {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #2b2a2a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.botonticket:hover {
+  background-color: #161616;
+}
+    </style>
     <body>
         <div id="header-container"></div>
         <div class="contenido">
@@ -39,7 +57,10 @@
         
                 </form>
             </div>
+
+            <button class="botonticket" id="btn-generar-ticket">Generar Ticket</button>
         </div>
+
         
     
         <script src="js/prod_carrito.js"></script>
@@ -49,3 +70,88 @@
     </body>
 
 </html>
+
+</body>
+<script>
+  document.getElementById('btn-generar-ticket').addEventListener('click', async () => {
+    const nombreUsuario = localStorage.getItem("nombreUsuario");
+
+    if (!nombreUsuario) {
+        alert("No se encontró el usuario. Por favor, inicia sesión.");
+        return;
+    }
+
+    try {
+        // Obtener datos del carrito
+        const response = await fetch(`http://localhost:3000/carr/${nombreUsuario}`);
+        if (!response.ok) {
+            throw new Error("Error al obtener los datos del carrito");
+        }
+
+        const productos = await response.json();
+
+        if (!Array.isArray(productos)) {
+            throw new Error("Formato de datos incorrecto recibido del servidor.");
+        }
+
+        // Generar el ticket
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Encabezado del ticket
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(16);
+        doc.text("TICKET DE COMPRA - TARA", 105, 20, { align: "center" });
+
+        // Subencabezado
+        doc.setFontSize(12);
+        doc.setFont("Helvetica", "normal");
+        doc.text(`Usuario: ${nombreUsuario}`, 10, 30);
+        doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 10, 40);
+
+        // Línea divisoria
+        doc.setDrawColor(200, 200, 200);
+        doc.line(10, 45, 200, 45);
+
+        // Listar productos
+        let y = 55; // Posición inicial en Y
+        let total = 0;
+
+        productos.forEach((producto, index) => {
+            const subtotal = producto.Precio_Original * producto.Cantidad;
+            total += subtotal;
+
+            doc.text(`${index + 1}. ${producto.Nombre_Producto}`, 10, y);
+            doc.text(`Talla: ${producto.Talla}`, 10, y + 10);
+            doc.text(`Cantidad: ${producto.Cantidad}`, 10, y + 20);
+            doc.text(`Precio: $${producto.Precio_Original.toFixed(2)}`, 100, y + 10);
+            doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 100, y + 20);
+
+            y += 30;
+
+            // Salto de página si llega al final
+            if (y > 270) {
+                doc.addPage();
+                y = 20;
+            }
+        });
+
+        // Total
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(14);
+        doc.text(`Total: $${total.toFixed(2)}`, 10, y + 10);
+
+        // Mensaje de agradecimiento
+        doc.setFontSize(12);
+        doc.text("¡Gracias por tu compra en TARA!", 105, y + 30, { align: "center" });
+
+        // Guardar el PDF
+        doc.save(`Ticket_${nombreUsuario}.pdf`);
+        alert("Ticket generado correctamente");
+    } catch (error) {
+        console.error("Error al generar el ticket:", error);
+        alert("Hubo un error al generar el ticket.");
+    }
+});
+
+</script>

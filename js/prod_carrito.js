@@ -96,5 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Error al eliminar el producto");
         }
     };
+
+
+    
 });
 

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket de Compra</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+  
+    .botonticket {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #2b2a2a;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .botonticket:hover {
+      background-color: #161616;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="botonticket" id="btn-generar-ticket">Generar Ticket</button>
+
+  <script>
+    async function fetchCarrito() {
+      // Simula una solicitud al servidor para obtener los datos del carrito
+      const response = await fetch('/api/carrito'); // Cambia '/api/carrito' por la ruta real en tu servidor
+      if (!response.ok) {
+        throw new Error('Error al obtener los datos del carrito');
+      }
+      return response.json();
+    }
+
+    document.getElementById('btn-generar-ticket').addEventListener('click', async () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      try {
+        // Obtener datos del carrito desde el servidor
+        const { cliente, productos } = await fetchCarrito();
+
+        const total = productos.reduce((sum, prod) => sum + prod.subtotal, 0);
+
+        // Cargar logo
+        const logoUrl = "images/taralogo-modified.png";
+        const logoImg = await fetch(logoUrl)
+          .then((res) => res.blob())
+          .then((blob) => {
+            return new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onload = () => resolve(reader.result);
+              reader.readAsDataURL(blob);
+            });
+          });
+
+        // Encabezado con logo
+        doc.addImage(logoImg, "PNG", 85, 10, 40, 40);
+        doc.setFont("Roboto", "bold");
+        doc.setFontSize(20);
+
+        doc.setFontSize(14);
+        doc.setTextColor(69, 69, 69);
+        doc.setFont("Roboto", "italic");
+        doc.text("Tu tienda de ropa favorita", 105, 60, { align: "center" });
+
+        // Línea divisoria
+        doc.setDrawColor(200, 200, 200);
+        doc.line(10, 65, 200, 65);
+
+        // Datos del cliente
+        doc.setFontSize(12);
+        doc.setTextColor(69, 69, 69);
+        doc.setFont("Roboto", "italic", "bold");
+        doc.text("Datos del Cliente", 10, 75);
+
+        doc.setTextColor(69, 69, 69);
+        doc.setFont("Roboto", "italic");
+        doc.text(`Cliente: ${cliente.nombre}`, 10, 85);
+        doc.text(`Dirección: ${cliente.direccion}`, 10, 95);
+        doc.text(`Correo: ${cliente.correo}`, 10, 105);
+
+        // Productos
+        doc.setFontSize(12);
+        doc.setTextColor(69, 69, 69);
+        doc.setFont("Roboto", "italic", "bold");
+        doc.text("Productos Comprados", 10, 120);
+
+        doc.setFont("Roboto", "italic");
+        let y = 130;
+        productos.forEach((prod, index) => {
+          doc.text(`${index + 1}. ${prod.nombre}`, 10, y);
+          doc.text(`Cantidad: ${prod.cantidad} | Precio: $${prod.precio} | Subtotal: $${prod.subtotal}`, 10, y + 10);
+          y += 20;
+        });
+
+        // Total
+        doc.setFontSize(14);
+        doc.setFont("Roboto", "italic", "bold");
+        doc.setTextColor(69, 69, 69);
+        doc.text(`Total a Pagar: $${total}`, 10, y);
+
+        // Mensaje de agradecimiento
+        doc.setTextColor(69, 69, 69);
+        doc.setFontSize(12);
+        doc.setFont("Roboto", "italic");
+        doc.text("¡Gracias por tu compra! Visítanos pronto.", 105, y + 20, { align: "center" });
+
+        // Guardar PDF
+        doc.save("Tara_Ticket_de_compra.pdf");
+
+      } catch (error) {
+        console.error('Error generando el ticket:', error);
+        alert('Hubo un error al generar el ticket. Inténtalo nuevamente.');
+      }
+    });
+  </script>
+</body>
+</html>
