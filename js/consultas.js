@@ -29,6 +29,8 @@ function mostrarSeccion(seccionId) {
         break;
         case 8: cargarPrecioCategoria(2)
         break;
+        case 9: mostrarInactivos()
+        break;
         default: cargarProductos(1)
         break;
     }
@@ -201,5 +203,60 @@ async function cargarPrecioCategoria(opc) {
     .catch(error => {
       console.error('Error al cargar los datos:', error);
     });
+    }
+}
+
+async function mostrarInactivos() {
+    try {
+        const respuesta = await fetch('http://localhost:3000/obtenerInactivos');
+        const datos = await respuesta.json();
+        console.log(datos);
+        const divInactivos = document.getElementById('inactivos');
+        
+        // Limpiar contenido previo
+        divInactivos.innerHTML = '';
+        
+        // Crear tabla para mostrar los resultados
+        const tabla = document.createElement('table');
+        tabla.classList.add('table', 'table-striped');
+        
+        // Crear encabezado de tabla
+        const thead = document.createElement('thead');
+        thead.innerHTML = `
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+            </tr>
+        `;
+        tabla.appendChild(thead);
+        
+        // Crear cuerpo de tabla
+        const tbody = document.createElement('tbody');
+        
+        // Iterar sobre los datos y crear filas
+        datos.forEach(item => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${item.Id_Producto || item.Id_Categoria || item.Id_Proveedor}</td>
+                <td>${item.Nombre_Producto || item.Nombre_Categoria || item.Nombre_Proveedor}</td>
+                <td>${item.Tipo}</td>
+            `;
+            tbody.appendChild(fila);
+        });
+        
+        tabla.appendChild(tbody);
+        divInactivos.appendChild(tabla);
+        
+    } catch (error) {
+        console.error('Error al obtener inactivos:', error);
+        
+        // Mostrar mensaje de error en el div
+        const divInactivos = document.getElementById('inactivos');
+        divInactivos.innerHTML = `
+            <div class="alert alert-danger" role="alert">
+                Error al cargar los registros inactivos.
+            </div>
+        `;
     }
 }
