@@ -18,7 +18,29 @@
                 <h3>Total: <span id="totalAmount">$0.00</span></h3>
                 <button id="btnPagar" class="btn btn-primary">Pagar</button>
             </div>
+        
+            <div id="formularioPago" class="formulariosLoginRegistro">
+                <h2 class="titulo">Información de Pago</h2>
+                <form id="formPago">
+                    <label for="nombre">Nombre del Titular</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Nombre completo" />
+                    
+                    <label for="numeroTarjeta">Número de Tarjeta</label>
+                    <input type="text" id="numeroTarjeta" name="numeroTarjeta" required placeholder="1234 5678 9876 5432" />
+        
+                    <label for="fechaExpiracion">Fecha de Expiración</label>
+                    <input type="month" id="fechaExpiracion" name="fechaExpiracion" required />
+        
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" required placeholder="123" />
+        
+                    <label for="direccion">Dirección de Facturación</label>
+                    <input type="text" id="direccion" name="direccion" required placeholder="Calle, Ciudad, Estado" />
+        
+                </form>
+            </div>
         </div>
+        
     
         <script src="js/prod_carrito.js"></script>
 
