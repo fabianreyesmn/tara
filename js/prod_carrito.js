@@ -97,6 +97,48 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
+    window.completarVenta = async function() {
+        const nombreUsuario = localStorage.getItem("nombreUsuario");
+        if (!nombreUsuario) {
+            console.error("No se encontró el ID de usuario");
+            alert("Por favor, inicia sesión para completar la venta");
+            return;
+        }
+
+        try {
+            // Primero, obtener el ID del cliente
+            const responseCliente = await fetch(`http://localhost:3000/cliente/${nombreUsuario}`);
+            const cliente = await responseCliente.json();
+            
+            if (!cliente || !cliente.Id_Cliente) {
+                console.error("No se encontró el ID del cliente");
+                alert("Error al obtener la información del cliente");
+                return;
+            }
+
+            // Llamar al endpoint para completar la venta
+            const response = await fetch(`http://localhost:3000/venta/completar/${cliente.Id_Cliente}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert('Venta completada exitosamente');
+                // Opcional: Limpiar el carrito después de completar la venta
+                cargarCarrito();
+            } else {
+                console.error('Error al completar la venta:', data.error);
+                alert(`Error: ${data.error}`);
+            }
+        } catch (error) {
+            console.error('Error en completar venta:', error);
+            alert('Hubo un problema al completar la venta');
+        }
+    };
 
     // Lógica para manejar el envío de datos del formulario
     const btnGuardarEnvio = document.getElementById("btnGuardarEnvio");
@@ -164,11 +206,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-
-
-
-
-
     
 });
 
